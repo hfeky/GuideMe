@@ -13,8 +13,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -30,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         LinearLayout drawerLinear = findViewById(R.id.drawerLinear);
-        BottomNavigationView navigationView = findViewById(R.id.navigationView);
+        final ViewPager viewPager = findViewById(R.id.viewPager);
+        final BottomNavigationView navigationView = findViewById(R.id.navigationView);
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -46,33 +46,64 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                Fragment fragment = null;
-                switch (menuItem.getItemId()) {
-                    case R.id.navigation_trips:
-                        fragment = new TripsFragment();
-                        break;
-                    case R.id.navigation_explore:
-                        fragment = new ExploreFragment();
-                        break;
-                    case R.id.navigation_history:
-                        fragment = new HistoryFragment();
-                        break;
-                }
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.contentFrame, fragment).commit();
-                return true;
-            }
-        });
-
         setSupportActionBar(toolbar);
         drawerToggle.setDrawerSlideAnimationEnabled(false);
         drawerLayout.addDrawerListener(drawerToggle);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new TripsFragment());
+        adapter.addFragment(new ExploreFragment());
+        adapter.addFragment(new HistoryFragment());
+        viewPager.setAdapter(adapter);
+
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        navigationView.setSelectedItemId(R.id.navigation_trips);
+                        break;
+                    case 1:
+                        navigationView.setSelectedItemId(R.id.navigation_explore);
+                        break;
+                    case 2:
+                        navigationView.setSelectedItemId(R.id.navigation_history);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.navigation_trips:
+                        viewPager.setCurrentItem(0);
+                        break;
+                    case R.id.navigation_explore:
+                        viewPager.setCurrentItem(1);
+                        break;
+                    case R.id.navigation_history:
+                        viewPager.setCurrentItem(2);
+                        break;
+                }
+                return true;
+            }
+        });
+
         navigationView.setSelectedItemId(R.id.navigation_explore);
     }
 
