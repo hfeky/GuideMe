@@ -1,0 +1,5 @@
+<font-family xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <font android:font="@font/logo_font" />
+
+</font-family>

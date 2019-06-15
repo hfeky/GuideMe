@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">Guide Me</string>
+    <string name="drawer_open">Open Drawer</string>
+    <string name="drawer_close">Close Drawer</string>
+
+    <string name="title_trips">Trips</string>
+    <string name="title_explore">Explore</string>
+    <string name="title_history">History</string>
+
+</resources>
