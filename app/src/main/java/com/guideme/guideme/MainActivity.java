@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout drawerLinear = findViewById(R.id.drawerLinear);
         final ViewPager viewPager = findViewById(R.id.viewPager);
         final BottomNavigationView navigationView = findViewById(R.id.navigationView);
+        FloatingActionButton addFab = findViewById(R.id.addFab);
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
 
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new TripsFragment());
+        adapter.addFragment(new DashboardFragment());
         adapter.addFragment(new ExploreFragment());
         adapter.addFragment(new HistoryFragment());
         viewPager.setAdapter(adapter);
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 switch (position) {
                     case 0:
-                        navigationView.setSelectedItemId(R.id.navigation_trips);
+                        navigationView.setSelectedItemId(R.id.navigation_dashboard);
                         break;
                     case 1:
                         navigationView.setSelectedItemId(R.id.navigation_explore);
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.navigation_trips:
+                    case R.id.navigation_dashboard:
                         viewPager.setCurrentItem(0);
                         break;
                     case R.id.navigation_explore:
@@ -105,6 +107,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navigationView.setSelectedItemId(R.id.navigation_explore);
+
+        addFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     protected void onPostCreate(Bundle savedInstanceState) {

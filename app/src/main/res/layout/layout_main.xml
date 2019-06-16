@@ -8,16 +8,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:focusableInTouchMode="true">
+            android:layout_height="match_parent">
 
             <com.google.android.material.appbar.AppBarLayout
                 android:id="@+id/appBarLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
+                android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbar"
@@ -42,30 +42,33 @@
 
             </com.google.android.material.appbar.AppBarLayout>
 
-            <RelativeLayout
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/navigationView"
+                app:layout_constraintTop_toBottomOf="@id/appBarLayout" />
 
-                <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/viewPager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_above="@+id/navigationView" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/addFab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_add_white"
+                app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+                app:layout_constraintEnd_toEndOf="@+id/viewPager" />
 
-                <com.google.android.material.bottomnavigation.BottomNavigationView
-                    android:id="@+id/navigationView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:background="?android:attr/windowBackground"
-                    app:itemIconTint="@color/nav_item_color"
-                    app:itemTextColor="@color/nav_item_color"
-                    app:menu="@menu/menu_navigation" />
+            <com.google.android.material.bottomnavigation.BottomNavigationView
+                android:id="@+id/navigationView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/windowBackground"
+                app:itemIconTint="@color/nav_item_color"
+                app:itemTextColor="@color/nav_item_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:menu="@menu/menu_navigation" />
 
-            </RelativeLayout>
-
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:id="@+id/drawerLinear"
