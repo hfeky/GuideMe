@@ -1,0 +1,23 @@
+<resources>
+
+    <string-array name="cities">
+        <item>All cities</item>
+        <item>Alexandria</item>
+        <item>Cairo</item>
+        <item>El Sahel</item>
+        <item>Giza</item>
+        <item>Luxor</item>
+        <item>Sharm El-Sheikh</item>
+    </string-array>
+
+    <string-array name="categories">
+        <item>All categories</item>
+        <item>Camping</item>
+        <item>Culture</item>
+        <item>Hiking</item>
+        <item>History</item>
+        <item>Sea</item>
+        <item>Shopping</item>
+    </string-array>
+
+</resources>

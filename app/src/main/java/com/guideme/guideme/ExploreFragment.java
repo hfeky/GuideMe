@@ -1,5 +1,6 @@
 package com.guideme.guideme;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,91 +34,115 @@ public class ExploreFragment extends Fragment {
         topCover.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), TripsActivity.class));
             }
         });
 
         cairoCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("city", 2);
+                startActivity(intent);
             }
         });
 
         alexandriaCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("city", 1);
+                startActivity(intent);
             }
         });
 
         gizaCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("city", 4);
+                startActivity(intent);
             }
         });
 
         luxorCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("city", 5);
+                startActivity(intent);
             }
         });
 
         sahelCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("city", 3);
+                startActivity(intent);
             }
         });
 
         sharmCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("city", 6);
+                startActivity(intent);
             }
         });
 
         seaCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("category", 5);
+                startActivity(intent);
             }
         });
 
         shoppingCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("category", 6);
+                startActivity(intent);
             }
         });
 
         cultureCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("category", 2);
+                startActivity(intent);
             }
         });
 
         historyCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("category", 4);
+                startActivity(intent);
             }
         });
 
         campingCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("category", 1);
+                startActivity(intent);
             }
         });
 
         hikingCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getContext(), TripsActivity.class);
+                intent.putExtra("category", 3);
+                startActivity(intent);
             }
         });
 

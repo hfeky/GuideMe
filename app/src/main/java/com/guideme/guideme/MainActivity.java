@@ -1,5 +1,6 @@
 package com.guideme.guideme;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
@@ -111,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
         addFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(MainActivity.this, TripsActivity.class));
             }
         });
     }
@@ -119,12 +120,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
         drawerToggle.syncState();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        overridePendingTransition(R.anim.zoom_in, R.anim.slide_out_right);
     }
 
     @Override

@@ -20,6 +20,11 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".TripsActivity"
+            android:label="Trips"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
