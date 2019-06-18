@@ -1,6 +1,7 @@
 package com.guideme.guideme;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -16,6 +17,8 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class TripsActivity extends AppCompatActivity {
 
     private PopupWindow filterPopup;
@@ -27,6 +30,8 @@ public class TripsActivity extends AppCompatActivity {
         setContentView(R.layout.layout_trips);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        FloatingActionButton createFab = findViewById(R.id.createFab);
+
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -38,6 +43,13 @@ public class TripsActivity extends AppCompatActivity {
             selectedCity = bundle.getInt("city", 0);
             selectedCategory = bundle.getInt("category", 0);
         }
+
+        createFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(TripsActivity.this, TripCreationActivity.class));
+            }
+        });
     }
 
     @Override

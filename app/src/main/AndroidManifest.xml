@@ -25,6 +25,11 @@
             android:label="Trips"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".TripCreationActivity"
+            android:label="Trip Overview"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
