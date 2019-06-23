@@ -8,11 +8,11 @@ import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
 
-public class ActivityAddFragment extends Fragment {
+public class PlaceAddFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.layout_add_activity, container, false);
+        View view = inflater.inflate(R.layout.layout_add_place, container, false);
 
         FrameLayout addActivityButton = view.findViewById(R.id.addActivityButton);
 

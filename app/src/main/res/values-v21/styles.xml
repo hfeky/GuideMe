@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="AppTheme.AppBarOverlay" parent="AppTheme">
+        <item name="android:statusBarColor">#0D000000</item>
+    </style>
+
+</resources>

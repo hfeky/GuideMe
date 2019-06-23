@@ -28,7 +28,8 @@
         <activity
             android:name=".TripCreationActivity"
             android:label="Trip Overview"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppBarOverlay" />
 
     </application>
 
