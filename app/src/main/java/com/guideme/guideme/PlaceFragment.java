@@ -13,11 +13,13 @@ import androidx.fragment.app.Fragment;
 
 public class PlaceFragment extends Fragment {
 
+    private TripCreationActivity context;
     private Drawable placeImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_place, container, false);
+        context = (TripCreationActivity) getContext();
 
         TextView placeTitle = view.findViewById(R.id.placeTitle);
         TextView placeLocation = view.findViewById(R.id.placeLocation);
@@ -27,9 +29,45 @@ public class PlaceFragment extends Fragment {
         ImageButton shareButton = view.findViewById(R.id.shareButton);
         ImageButton favoriteButton = view.findViewById(R.id.favoriteButton);
 
-        placeImage = getResources().getDrawable(R.drawable.image_placeholder);
+        Bundle bundle = getArguments();
+        if (getArguments() != null) {
+            String title = bundle.getString("title", "Title unknown");
+            String location = bundle.getString("location", "Location unknown");
+            String date = bundle.getString("date", "No date set");
+            String description = bundle.getString("description", "No description available");
+            String note = bundle.getString("note", "");
+            int image = bundle.getInt("image", R.drawable.image_placeholder);
+            placeTitle.setText(title);
+            placeLocation.setText(location);
+            placeDate.setText(date);
+            placeDescription.setText(description);
+            placeNote.setText(note);
+            placeImage = getResources().getDrawable(image);
+        }
+
+        shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        favoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (isVisible()) {
+            context.setPlaceImage(placeImage);
+        }
     }
 
     public Drawable getPlaceImage() {
