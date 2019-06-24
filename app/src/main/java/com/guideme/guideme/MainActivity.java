@@ -22,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle drawerToggle;
+    private FloatingActionButton addFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout drawerLinear = findViewById(R.id.drawerLinear);
         final ViewPager viewPager = findViewById(R.id.viewPager);
         final BottomNavigationView navigationView = findViewById(R.id.navigationView);
-        FloatingActionButton addFab = findViewById(R.id.addFab);
+        addFab = findViewById(R.id.addFab);
 
         drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open, R.string.drawer_close) {
             @Override
@@ -138,5 +139,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item) || drawerToggle.onOptionsItemSelected(item);
+    }
+
+    public FloatingActionButton getAddFab() {
+        return addFab;
     }
 }
