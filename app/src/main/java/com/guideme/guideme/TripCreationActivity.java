@@ -1,12 +1,19 @@
 package com.guideme.guideme;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewTreeObserver;
+import android.view.animation.AccelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -23,6 +30,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class TripCreationActivity extends AppCompatActivity {
 
+    public static final String CIRCULAR_REVEAL_X = "CIRCULAR_REVEAL_X";
+    public static final String CIRCULAR_REVEAL_Y = "CIRCULAR_REVEAL_Y";
+
+    private View rootLayout;
     private ImageView placeImage;
 
     @Override
@@ -30,7 +41,7 @@ public class TripCreationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_create_trip);
 
-        LinearLayout rootLayout = findViewById(R.id.rootLayout);
+        rootLayout = findViewById(R.id.rootLayout);
         placeImage = findViewById(R.id.placeImage);
 
         ViewCompat.setOnApplyWindowInsetsListener(rootLayout, new OnApplyWindowInsetsListener() {
@@ -44,6 +55,27 @@ public class TripCreationActivity extends AppCompatActivity {
                 return insets;
             }
         });
+
+        Intent intent = getIntent();
+
+        if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
+                intent.hasExtra(CIRCULAR_REVEAL_X) && intent.hasExtra(CIRCULAR_REVEAL_Y)) {
+            rootLayout.setVisibility(View.INVISIBLE);
+
+            final int revealX = intent.getIntExtra(CIRCULAR_REVEAL_X, 0);
+            final int revealY = intent.getIntExtra(CIRCULAR_REVEAL_Y, 0);
+
+            ViewTreeObserver viewTreeObserver = rootLayout.getViewTreeObserver();
+            if (viewTreeObserver.isAlive()) {
+                viewTreeObserver.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        revealActivity(revealX, revealY);
+                        rootLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    }
+                });
+            }
+        }
 
         final AppBarLayout appBarLayout = findViewById(R.id.appBarLayout);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -59,14 +91,10 @@ public class TripCreationActivity extends AppCompatActivity {
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             private boolean isShowing = tripName.getVisibility() == View.VISIBLE;
-            private int scrollRange = -1;
 
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
+                if (!isShowing && Math.abs(verticalOffset) - appBarLayout.getTotalScrollRange() == 0) {
                     isShowing = true;
                     tripName.setVisibility(View.VISIBLE);
                 } else if (isShowing) {
@@ -152,6 +180,24 @@ public class TripCreationActivity extends AppCompatActivity {
             finish();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void revealActivity(int x, int y) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            float finalRadius = (float) (Math.max(rootLayout.getWidth(), rootLayout.getHeight()) * 1.1);
+            Animator circularReveal = ViewAnimationUtils.createCircularReveal(rootLayout, x, y, 0, finalRadius);
+            circularReveal.setDuration(400);
+            circularReveal.setInterpolator(new AccelerateInterpolator());
+            circularReveal.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    rootLayout.setVisibility(View.VISIBLE);
+                }
+            });
+            circularReveal.start();
+        } else {
+            Toast.makeText(this, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void setPlaceImage(Drawable drawable) {

@@ -15,9 +15,10 @@
             app:fel_size_bottom="200dp">
 
             <View
+                android:id="@+id/fadingEdgeLight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#1AFFEB3B" />
+                tools:background="#33F0C878" />
 
         </com.bosphere.fadingedgelayout.FadingEdgeLayout>
 
@@ -57,7 +58,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E9EDF0" />
+                android:background="#EEEEEE" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -135,7 +136,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#E9EDF0" />
+                android:background="#EEEEEE" />
 
             <LinearLayout
                 android:layout_width="match_parent"

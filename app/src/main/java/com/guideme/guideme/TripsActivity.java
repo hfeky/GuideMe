@@ -47,7 +47,13 @@ public class TripsActivity extends AppCompatActivity {
         createFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(TripsActivity.this, TripCreationActivity.class));
+                Intent intent = new Intent(TripsActivity.this, TripCreationActivity.class);
+                int revealX = (int) (v.getX() + v.getWidth() / 2);
+                int revealY = (int) (v.getY() + v.getHeight() / 2);
+                intent.putExtra(TripCreationActivity.CIRCULAR_REVEAL_X, revealX);
+                intent.putExtra(TripCreationActivity.CIRCULAR_REVEAL_Y, revealY);
+                startActivity(intent);
+                overridePendingTransition(0, 0);
             }
         });
     }
