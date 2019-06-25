@@ -3,7 +3,7 @@
     android:layout_height="match_parent">
 
     <FrameLayout
-        android:id="@+id/addActivityButton"
+        android:id="@+id/addPlaceButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="40dp"

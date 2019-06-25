@@ -14,9 +14,9 @@ public class PlaceAddFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_add_place, container, false);
 
-        FrameLayout addActivityButton = view.findViewById(R.id.addActivityButton);
+        FrameLayout addPlaceButton = view.findViewById(R.id.addPlaceButton);
 
-        addActivityButton.setOnClickListener(new View.OnClickListener() {
+        addPlaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
