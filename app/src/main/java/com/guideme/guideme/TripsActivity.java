@@ -32,7 +32,6 @@ public class TripsActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         FloatingActionButton createFab = findViewById(R.id.createFab);
 
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
