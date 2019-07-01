@@ -16,8 +16,7 @@ import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class TripsActivity extends AppCompatActivity {
 
@@ -30,7 +29,8 @@ public class TripsActivity extends AppCompatActivity {
         setContentView(R.layout.layout_trips);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        FloatingActionButton createFab = findViewById(R.id.createFab);
+        AutoHideFAB createFab = findViewById(R.id.createFab);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -43,6 +43,7 @@ public class TripsActivity extends AppCompatActivity {
             selectedCategory = bundle.getInt("category", 0);
         }
 
+        createFab.setupWithRecyclerView(recyclerView);
         createFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

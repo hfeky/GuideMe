@@ -17,12 +17,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle drawerToggle;
-    private FloatingActionButton addFab;
+    private AutoHideFAB addFab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item) || drawerToggle.onOptionsItemSelected(item);
     }
 
-    public FloatingActionButton getAddFab() {
+    public AutoHideFAB getAddFab() {
         return addFab;
     }
 }

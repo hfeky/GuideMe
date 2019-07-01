@@ -10,8 +10,6 @@ import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 public class ExploreFragment extends Fragment {
 
     @Override
@@ -35,18 +33,8 @@ public class ExploreFragment extends Fragment {
         CardView hikingCategory = view.findViewById(R.id.hikingCategory);
 
         NestedScrollView scrollView = view.findViewById(R.id.scrollView);
-        final FloatingActionButton fab = ((MainActivity) getContext()).getAddFab();
-        scrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            @Override
-            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                int dyConsumed = scrollY - oldScrollY;
-                if (dyConsumed > 10 && fab.getVisibility() == View.VISIBLE) {
-                    fab.hide();
-                } else if (dyConsumed < -10 && fab.getVisibility() != View.VISIBLE) {
-                    fab.show();
-                }
-            }
-        });
+        AutoHideFAB fab = ((MainActivity) getContext()).getAddFab();
+        fab.setupWithNestedScrollView(scrollView);
 
         topCover.setOnClickListener(new View.OnClickListener() {
             @Override
