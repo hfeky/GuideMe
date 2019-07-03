@@ -37,7 +37,7 @@ public class DashboardFragment extends Fragment {
         favoritePlaces.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), FavoritePlacesActivity.class));
             }
         });
 

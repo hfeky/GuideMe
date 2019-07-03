@@ -34,6 +34,11 @@
             android:theme="@style/AppTheme.AppBarOverlay" />
 
         <activity
+            android:name=".FavoritePlacesActivity"
+            android:label="Favorite Places"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".EmergencyNumbersActivity"
             android:label="Emergency Numbers"
             android:screenOrientation="portrait" />
