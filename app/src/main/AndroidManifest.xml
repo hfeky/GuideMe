@@ -39,6 +39,11 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".CommonPhrasesActivity"
+            android:label="Common Phrases"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".EmergencyNumbersActivity"
             android:label="Emergency Numbers"
             android:screenOrientation="portrait" />

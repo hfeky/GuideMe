@@ -44,7 +44,7 @@ public class DashboardFragment extends Fragment {
         commonPhrases.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), CommonPhrasesActivity.class));
             }
         });
 
