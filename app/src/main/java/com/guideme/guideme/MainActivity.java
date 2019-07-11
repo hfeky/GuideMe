@@ -137,6 +137,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.item_notifications) {
+            startActivity(new Intent(this, NotificationsActivity.class));
+        }
         return super.onOptionsItemSelected(item) || drawerToggle.onOptionsItemSelected(item);
     }
 

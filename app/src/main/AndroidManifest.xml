@@ -48,6 +48,11 @@
             android:label="Emergency Numbers"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".NotificationsActivity"
+            android:label="Notifications"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>
