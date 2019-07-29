@@ -1,14 +1,16 @@
 <resources>
 
     <string-array name="cities">
-        <item>All cities</item>
+        <item>Select City</item>
         <item>Alexandria</item>
         <item>Cairo</item>
-        <item>El Sahel</item>
+        <item>North Coast</item>
         <item>Giza</item>
         <item>Luxor</item>
         <item>Sharm El-Sheikh</item>
+
     </string-array>
+
 
     <string-array name="categories">
         <item>All categories</item>
@@ -18,6 +20,53 @@
         <item>History</item>
         <item>Sea</item>
         <item>Shopping</item>
+
+
+
     </string-array>
+
+
+    <string-array name="cities_for_filters">
+        <item>Alexandria</item>
+        <item>Cairo</item>
+        <item>North Coast</item>
+        <item>Giza</item>
+        <item>Luxor</item>
+        <item>Sharm El-Sheikh</item>
+        <item>Fayyoum</item>
+        <item>Hurghada</item>
+        <item>Siwa</item>
+        <item>Taba</item>
+        <item>Sharqia</item>
+        <item>Aswan</item>
+        <item>Marsa Matruh</item>
+    </string-array>
+
+    <string-array name="categories_for_filters">
+        <item>Snorkelling</item>
+        <item>Nature</item>
+        <item>Landmark</item>
+        <item>Swimming</item>
+        <item>Sandboarding</item>
+        <item>Sandvolley</item>
+        <item>Stargazing</item>
+        <item>Recreation</item>
+        <item>Tennis</item>
+        <item>Squash</item>
+        <item>Bowling</item>
+        <item>Diving</item>
+        <item>Yacht</item>
+        <item>Ferry</item>
+        <item>Safari</item>
+        <item>Kitesurfing</item>
+        <item>Windsurfing</item>
+        <item>Golf</item>
+        <item>Bicycling</item>
+        <item>Sunset</item>
+        <item>Cruise</item>
+        <item>Air Balloons</item>
+
+    </string-array>
+
 
 </resources>

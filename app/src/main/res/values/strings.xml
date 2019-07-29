@@ -7,5 +7,9 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_explore">Explore</string>
     <string name="title_history">History</string>
+    <string name="title_activity_choose_filters">Trip Preferences</string>
+
+
+
 
 </resources>
