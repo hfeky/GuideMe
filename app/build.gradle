@@ -67,7 +67,7 @@ dependencies {
 
 
     //FLUTTER HELL YEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-    implementation project(':flutter')
+    //implementation project(':flutter')
 
 }
 

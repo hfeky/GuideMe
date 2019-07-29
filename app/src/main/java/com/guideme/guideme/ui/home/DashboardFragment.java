@@ -38,6 +38,7 @@ public class DashboardFragment extends Fragment {
         requestTourGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(getContext(), GuidesYouMightLikeActivity.class));
             }
         });
 
