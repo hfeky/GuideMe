@@ -1,4 +1,4 @@
-package com.guideme.guideme.ui.trips;
+package com.guideme.guideme.ui.dashboard;
 
 
 import android.Manifest;
@@ -64,7 +64,7 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_request_tour_guide);
+        setContentView(R.layout.layout_request_tour_guide);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
 
