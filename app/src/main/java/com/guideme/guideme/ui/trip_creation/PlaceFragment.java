@@ -1,4 +1,4 @@
-package com.guideme.guideme.ui.trips;
+package com.guideme.guideme.ui.trip_creation;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
