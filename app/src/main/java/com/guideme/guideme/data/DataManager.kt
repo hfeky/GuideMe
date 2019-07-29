@@ -5,6 +5,7 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.Source
 import com.guideme.guideme.data.models.User
 
@@ -37,6 +38,62 @@ class DataManager {
     fun getUser(userId: String, successListener: OnSuccessListener<DocumentSnapshot>) {
         db.collection("users")
             .document(userId)
+            .get(source)
+            .addOnSuccessListener(successListener)
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun getCity(cityId: String, successListener: OnSuccessListener<DocumentSnapshot>) {
+        db.collection("cities")
+            .document(cityId)
+            .get(source)
+            .addOnSuccessListener(successListener)
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun getTrips(cityId: String, successListener: OnSuccessListener<QuerySnapshot>) {
+        db.collection("cities")
+            .document(cityId)
+            .collection("trips")
+            .get(source)
+            .addOnSuccessListener(successListener)
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun getTripPlaces(cityId: String, tripId: String, successListener: OnSuccessListener<QuerySnapshot>) {
+        db.collection("cities")
+            .document(cityId)
+            .collection("trips")
+            .document(tripId)
+            .collection("places")
+            .get(source)
+            .addOnSuccessListener(successListener)
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun getRestaurants(cityId: String, successListener: OnSuccessListener<QuerySnapshot>) {
+        db.collection("cities")
+            .document(cityId)
+            .collection("restaurants")
+            .get(source)
+            .addOnSuccessListener(successListener)
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun getHotels(cityId: String, successListener: OnSuccessListener<QuerySnapshot>) {
+        db.collection("cities")
+            .document(cityId)
+            .collection("hotels")
             .get(source)
             .addOnSuccessListener(successListener)
             .addOnFailureListener { exception ->
