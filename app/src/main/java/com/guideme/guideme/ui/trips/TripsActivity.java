@@ -3,6 +3,7 @@ package com.guideme.guideme.ui.trips;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -128,7 +129,8 @@ public class TripsActivity extends AppCompatActivity {
             }
         });
 
-        filterPopup.showAsDropDown(view);
+        filterPopup.setAnimationStyle(R.style.PopupAnimation);
+        filterPopup.showAtLocation(view, Gravity.TOP, 0, 0);
 
         View container = (View) filterPopup.getContentView().getParent();
         WindowManager windowManager = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
