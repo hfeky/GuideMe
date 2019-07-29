@@ -28,7 +28,12 @@ import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guideme.guideme.R;
+import com.guideme.guideme.data.models.Place;
+import com.guideme.guideme.data.models.Trip;
 import com.guideme.guideme.ui.common.ViewPagerAdapter;
+
+import java.util.Collections;
+import java.util.Comparator;
 
 public class TripCreationActivity extends AppCompatActivity {
 
@@ -37,6 +42,8 @@ public class TripCreationActivity extends AppCompatActivity {
 
     private View rootLayout;
     private ImageView placeImage;
+
+    private Trip trip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,22 +118,26 @@ public class TripCreationActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            // TODO: Implement trip presets
+            trip = extras.getParcelable("trip");
+
+            Collections.sort(trip.getPlaces(), new Comparator<Place>() {
+                @Override
+                public int compare(Place place1, Place place2) {
+                    return place1.getOrder() - place2.getOrder();
+                }
+            });
+
+            for (Place place : trip.getPlaces()) {
+                Fragment fragment = new PlaceFragment();
+                Bundle bundle = new Bundle();
+                bundle.putParcelable("place", place);
+                bundle.putString("location", trip.getLocation() + ", Egypt");
+                fragment.setArguments(bundle);
+                adapter.addFragment(adapter.getCount() - 1, fragment);
+            }
         }
 
         tripName.setVisibility(View.GONE);
-
-        // TODO: Remove that test
-        Fragment fragment = new PlaceFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("title", "The Great Pyramids");
-        bundle.putString("location", "Giza, Egypt");
-        bundle.putString("date", "31/07/2019");
-        bundle.putString("description", "The great pyramids consist of 3 pyramids: Khofu, Khafraa, Mankaraa. The Sphinx is also located nearby there.");
-        bundle.putString("note", "");
-        bundle.putInt("image", R.drawable.frame_giza);
-        fragment.setArguments(bundle);
-        adapter.addFragment(0, fragment);
 
         viewPager.setAdapter(adapter);
 

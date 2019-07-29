@@ -11,8 +11,8 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import com.guideme.guideme.R;
-import com.guideme.guideme.ui.trips_listing.TripsActivity;
 import com.guideme.guideme.ui.common.AutoHideFAB;
+import com.guideme.guideme.ui.trips_listing.TripsActivity;
 
 public class ExploreFragment extends Fragment {
 

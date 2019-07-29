@@ -42,10 +42,10 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.trips.OrderCabActivity"
+            android:name=".ui.dashboard.OrderCabActivity"
             android:label="@string/title_activity_order_cab"></activity>
-        <activity android:name=".ui.trips.RequestTourGuideActivity" />
-        <activity android:name=".ui.trips.OrderTaxiActivity" />
+        <activity android:name=".ui.dashboard.RequestTourGuideActivity" />
+        <activity android:name=".ui.dashboard.OrderTaxiActivity" />
         <activity
             android:name=".ui.authentication.LogInActivity"
             android:screenOrientation="portrait">
