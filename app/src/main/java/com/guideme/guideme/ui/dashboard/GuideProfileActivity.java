@@ -2,6 +2,8 @@ package com.guideme.guideme.ui.dashboard;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +15,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.models.TourGuide;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GuideProfileActivity extends AppCompatActivity {
 
     private TextView guideName;
@@ -23,6 +28,7 @@ public class GuideProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guide_profile);
 
+        RecyclerView recyclerView = findViewById(R.id.recyclerView);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -42,6 +48,17 @@ public class GuideProfileActivity extends AppCompatActivity {
 //        guideAvatar = findViewById(R.id.avatar);
         guideName.setText(guide.getName());
         guideRating.setText(guide.getName()+" has a rating of "+guide.getRating()+" stars");
+
+        List<String> perks = new ArrayList<>();
+        perks.add(" Multilingual");
+        perks.add(" Ge");
+        perks.add(" Very Ge");
+        perks.add(" Super Ge");
+        perks.add(" Mega Ge");
+        perks.add(" Ultra Ge");
+
+        recyclerView.setLayoutManager(new GridLayoutManager(this,2));
+        recyclerView.setAdapter(new PerksAdapter(this, perks));
     }
 
     @Override
