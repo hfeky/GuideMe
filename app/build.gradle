@@ -12,9 +12,12 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "CLIENT_ID", "\"${loadSecret("UBER_CLIENT_ID")}\"" //Add your client id to gradle.properties
-        buildConfigField "String", "REDIRECT_URI", "\"${loadSecret("UBER_REDIRECT_URI")}\"" //Add your redirect uri to gradle.properties
-        buildConfigField "String", "SERVER_TOKEN", "\"${loadSecret("UBER_SERVER_TOKEN")}\"" //Add your server token to gradle.properties
+        buildConfigField "String", "CLIENT_ID", "\"${loadSecret("UBER_CLIENT_ID")}\""
+        //Add your client id to gradle.properties
+        buildConfigField "String", "REDIRECT_URI", "\"${loadSecret("UBER_REDIRECT_URI")}\""
+        //Add your redirect uri to gradle.properties
+        buildConfigField "String", "SERVER_TOKEN", "\"${loadSecret("UBER_SERVER_TOKEN")}\""
+        //Add your server token to gradle.properties
     }
     buildTypes {
         release {
@@ -58,6 +61,10 @@ dependencies {
 
     //uber
     implementation "com.uber.sdk:rides-android:0.5.3"
+
+
+    //FLUTTER HELL YEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    implementation project(':flutter')
 
 }
 
