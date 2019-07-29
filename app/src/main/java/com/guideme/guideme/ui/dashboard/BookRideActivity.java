@@ -1,6 +1,5 @@
 package com.guideme.guideme.ui.dashboard;
 
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -39,7 +38,8 @@ import com.guideme.guideme.R;
 
 import java.util.Arrays;
 
-public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnCameraChangeListener , PlaceSelectionListener , OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCameraChangeListener, PlaceSelectionListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private LocationRequest mLocationRequest;
@@ -50,7 +50,7 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_taxi);
+        setContentView(R.layout.layout_book_ride);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
 
@@ -67,30 +67,23 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
             }
         });
 
-            // Initialize Places.
-            Places.initialize(getApplicationContext(), "AIzaSyBdCXqTL1firHWYqahfPkXCIoeMPlX6-II");
-            // Create a new Places client instance.
-            PlacesClient placesClient = Places.createClient(getApplicationContext());
+        // Initialize Places.
+        Places.initialize(getApplicationContext(), "AIzaSyBdCXqTL1firHWYqahfPkXCIoeMPlX6-II");
+        // Create a new Places client instance.
+        PlacesClient placesClient = Places.createClient(getApplicationContext());
 
-            // Initialize the AutocompleteSupportFragment.
-            final AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+        // Initialize the AutocompleteSupportFragment.
+        final AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
-//            autocompleteFragment.setHint(getString(R.string.select_location_search_bar));
-//        autocompleteFragment.setLocationRestriction(RectangularBounds.newInstance(
-//                new LatLng(34.7006096, 19.2477876),
-//                new LatLng(41.7488862, 29.7296986))); //Greece bounds
-            autocompleteFragment.setCountry("eg");
+        autocompleteFragment.setHint("Enter a location");
+        autocompleteFragment.setCountry("EG");
 
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG));
 
-            // Specify the types of place data to return.
-            autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG));
-
-
-            // Set up a PlaceSelectionListener to handle the response.
-            autocompleteFragment.setOnPlaceSelectedListener(this);
-
-
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(this);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -100,19 +93,6 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-//        try {
-//            // Customise the styling of the base map using a JSON object defined
-//            // in a raw resource file.
-//            boolean success = googleMap.setMapStyle(
-//                    MapStyleOptions.loadRawResourceStyle(
-//                            this, R.raw.mapstyle));
-//
-//            if (!success) {
-//                Log.e("mapstyle", "Style parsing failed.");
-//            }
-//        } catch (Resources.NotFoundException e) {
-//            Log.e("mapstyle", "Can't find style. Error: ", e);
-//        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -121,6 +101,7 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
                 return;
             }
         }
+
         buildGoogleApiClient();
         mMap.setMyLocationEnabled(true);
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
@@ -154,7 +135,6 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
         // to set the center of the screen point to the location
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 //        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-
     }
 
 
@@ -166,12 +146,10 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
     @Override
     public void onLocationChanged(Location location) {
 //        lastLocation = location;
-
 //        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 //        // to set the center of the screen point to the location
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 //        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
-
     }
 
     @Override
@@ -267,9 +245,7 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
             return;
         }
         final LatLng latLng = place.getLatLng();
-        System.out.println(latLng+"AAAAAAAAA");
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
-
         mMap.setOnCameraChangeListener(this);
     }
 
@@ -303,13 +279,13 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                ActivityCompat.requestPermissions(OrderTaxiActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                                ActivityCompat.requestPermissions(BookRideActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                             }
                         })
                         .create()
                         .show();
             } else {
-                ActivityCompat.requestPermissions(OrderTaxiActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+                ActivityCompat.requestPermissions(BookRideActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
             }
         }
     }
