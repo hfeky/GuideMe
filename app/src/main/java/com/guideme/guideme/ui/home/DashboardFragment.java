@@ -16,6 +16,8 @@ import com.guideme.guideme.ui.dashboard.FavoritePlacesActivity;
 import com.guideme.guideme.R;
 import com.guideme.guideme.ui.common.WeatherCard;
 import com.guideme.guideme.ui.common.AutoHideFAB;
+import com.guideme.guideme.ui.trips.OrderTaxiActivity;
+import com.guideme.guideme.ui.trips.RequestTourGuideActivity;
 
 public class DashboardFragment extends Fragment {
 
@@ -37,7 +39,7 @@ public class DashboardFragment extends Fragment {
         requestTourGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), RequestTourGuideActivity.class));
             }
         });
 
@@ -58,7 +60,7 @@ public class DashboardFragment extends Fragment {
         bookARide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                startActivity(new Intent(getContext(), OrderTaxiActivity.class));
             }
         });
 
