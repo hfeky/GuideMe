@@ -15,4 +15,16 @@
         <item name="android:windowExitAnimation">@anim/anim_popup_exit</item>
     </style>
 
+    <style name="Button.Normal" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">42sp</item>
+        <item name="android:background">@drawable/button_normal</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
+
 </resources>
