@@ -1,9 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.guideme.guideme"
     android:installLocation="preferExternal">
 
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
         android:allowBackup="true"
@@ -14,15 +29,32 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".ui.trips.OrderCabActivity"
+            android:label="@string/title_activity_order_cab"></activity>
+        <activity android:name=".ui.trips.RequestTourGuideActivity" />
+        <activity android:name=".ui.trips.OrderTaxiActivity" />
         <activity
             android:name=".ui.authentication.LogInActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ui.authentication.SignUpActivity"
             android:screenOrientation="portrait" />
@@ -41,33 +73,31 @@
             android:name=".ui.trips_listing.TripsActivity"
             android:label="Trips"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.trip_creation.TripCreationActivity"
             android:label="Trip Overview"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.AppBarOverlay" />
-
         <activity
             android:name=".ui.dashboard.FavoritePlacesActivity"
             android:label="Favorite Places"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.dashboard.CommonPhrasesActivity"
             android:label="Common Phrases"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.dashboard.EmergencyNumbersActivity"
             android:label="Emergency Numbers"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.home.NotificationsActivity"
             android:label="Notifications"
             android:screenOrientation="portrait" />
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>
