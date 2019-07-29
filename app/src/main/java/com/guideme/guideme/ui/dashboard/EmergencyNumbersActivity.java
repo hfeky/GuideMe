@@ -42,8 +42,6 @@ public class EmergencyNumbersActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         List<EmergencyNumber> emergencyNumbers = new ArrayList<>();
         emergencyNumbers.add(new EmergencyNumber("123", "Main Ambulance"));
         emergencyNumbers.add(new EmergencyNumber("126", "Tourist Police"));
@@ -59,8 +57,9 @@ public class EmergencyNumbersActivity extends AppCompatActivity {
         emergencyNumbers.add(new EmergencyNumber("+2 2265-5000", "+2 2265-3333", "Cairo Airport (Terminal 1)"));
         emergencyNumbers.add(new EmergencyNumber("+2 2265-2029", "+2 2265-2222", "Cairo Airport (Terminal 2)"));
         emergencyNumbers.add(new EmergencyNumber("+2 2575-3555", "Railway Information"));
-        EmergencyNumbersAdapter adapter = new EmergencyNumbersAdapter(this, emergencyNumbers);
-        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new EmergencyNumbersAdapter(this, emergencyNumbers));
     }
 
     @Override
