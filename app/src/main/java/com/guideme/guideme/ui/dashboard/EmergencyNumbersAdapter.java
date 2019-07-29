@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.dashboard;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,12 +7,15 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.guideme.guideme.R;
+import com.guideme.guideme.data.models.EmergencyNumber;
+
 import java.util.List;
 
-public class PhonesAdapter extends RecyclerView.Adapter<PhonesAdapter.ViewHolder> {
+public class EmergencyNumbersAdapter extends RecyclerView.Adapter<EmergencyNumbersAdapter.ViewHolder> {
 
     private EmergencyNumbersActivity context;
-    private List<PhoneItem> phoneItems;
+    private List<EmergencyNumber> emergencyNumbers;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -27,36 +30,36 @@ public class PhonesAdapter extends RecyclerView.Adapter<PhonesAdapter.ViewHolder
         }
     }
 
-    public PhonesAdapter(EmergencyNumbersActivity context, List<PhoneItem> phoneItems) {
+    public EmergencyNumbersAdapter(EmergencyNumbersActivity context, List<EmergencyNumber> emergencyNumbers) {
         this.context = context;
-        this.phoneItems = phoneItems;
+        this.emergencyNumbers = emergencyNumbers;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_phone, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_emergency_number, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final PhoneItem phoneItem = phoneItems.get(position);
-        if (phoneItem.getSecondaryPhone() == null) {
-            holder.phone.setText(phoneItem.getPrimaryPhone());
+        final EmergencyNumber emergencyNumber = emergencyNumbers.get(position);
+        if (emergencyNumber.getSecondaryPhone() == null) {
+            holder.phone.setText(emergencyNumber.getPrimaryPhone());
         } else {
-            holder.phone.setText(phoneItem.getPrimaryPhone() + "\n" + phoneItem.getSecondaryPhone());
+            holder.phone.setText(emergencyNumber.getPrimaryPhone() + "\n" + emergencyNumber.getSecondaryPhone());
         }
-        holder.title.setText(phoneItem.getTitle());
+        holder.title.setText(emergencyNumber.getTitle());
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                context.callPhone(phoneItem.getPrimaryPhone());
+                context.callPhone(emergencyNumber.getPrimaryPhone());
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return phoneItems.size();
+        return emergencyNumbers.size();
     }
 }

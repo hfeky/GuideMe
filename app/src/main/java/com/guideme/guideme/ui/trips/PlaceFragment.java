@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.trips;
 
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.palette.graphics.Palette;
+
+import com.guideme.guideme.R;
 
 public class PlaceFragment extends Fragment {
 

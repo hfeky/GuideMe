@@ -1,11 +1,11 @@
-package com.guideme.guideme;
+package com.guideme.guideme.data.models;
 
-public class PhraseItem {
+public class CommonPhrase {
 
     private String englishPhrase, arabicPhrase, arabicPhraseEnglishLetters;
     private int phraseIcon;
 
-    public PhraseItem(String englishPhrase, String arabicPhrase, String arabicPhraseEnglishLetters, int phraseIcon) {
+    public CommonPhrase(String englishPhrase, String arabicPhrase, String arabicPhraseEnglishLetters, int phraseIcon) {
         this.englishPhrase = englishPhrase;
         this.arabicPhrase = arabicPhrase;
         this.arabicPhraseEnglishLetters = arabicPhraseEnglishLetters;

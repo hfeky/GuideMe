@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.common;
 
 import android.content.Context;
 import android.graphics.Rect;

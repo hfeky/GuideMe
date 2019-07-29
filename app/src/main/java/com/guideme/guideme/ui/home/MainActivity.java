@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.home;
 
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -17,6 +17,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.guideme.guideme.R;
+import com.guideme.guideme.ui.trips.TripsActivity;
+import com.guideme.guideme.ui.common.AutoHideFAB;
+import com.guideme.guideme.ui.common.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
 

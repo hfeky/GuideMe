@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <com.guideme.guideme.WeatherCard
+        <com.guideme.guideme.ui.common.WeatherCard
             android:id="@+id/weatherCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

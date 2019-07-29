@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.home;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,10 @@ import android.widget.LinearLayout;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.guideme.guideme.R;
+import com.guideme.guideme.ui.common.AutoHideFAB;
+import com.guideme.guideme.ui.home.MainActivity;
 
 public class HistoryFragment extends Fragment {
 

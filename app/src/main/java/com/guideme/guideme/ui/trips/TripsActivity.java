@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.trips;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +17,9 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.guideme.guideme.R;
+import com.guideme.guideme.ui.common.AutoHideFAB;
 
 public class TripsActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.dashboard;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.guideme.guideme.R;
+import com.guideme.guideme.data.models.EmergencyNumber;
+import com.guideme.guideme.ui.common.PermissionsHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,25 +42,24 @@ public class EmergencyNumbersActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<PhoneItem> phoneItems = new ArrayList<>();
-        phoneItems.add(new PhoneItem("123", "Main Ambulance"));
-        phoneItems.add(new PhoneItem("126", "Tourist Police"));
-        phoneItems.add(new PhoneItem("128", "Traffic Police"));
-        phoneItems.add(new PhoneItem("122", "Emergency Police"));
-        phoneItems.add(new PhoneItem("180", "Fire Department"));
-        phoneItems.add(new PhoneItem("121", "Electricity Emergency"));
-        phoneItems.add(new PhoneItem("129", "Natural Gas Emergency"));
-        phoneItems.add(new PhoneItem("150", "Clock"));
-        phoneItems.add(new PhoneItem("144", "International Calls from landlines"));
-        phoneItems.add(new PhoneItem("177", "Landline telephone bills inquiries"));
-        phoneItems.add(new PhoneItem("16", "Landline telephone complaints"));
-        phoneItems.add(new PhoneItem("+2 2265-5000", "+2 2265-3333", "Cairo Airport (Terminal 1)"));
-        phoneItems.add(new PhoneItem("+2 2265-2029", "+2 2265-2222", "Cairo Airport (Terminal 2)"));
-        phoneItems.add(new PhoneItem("+2 2575-3555", "Railway Information"));
-        PhonesAdapter adapter = new PhonesAdapter(this, phoneItems);
+        List<EmergencyNumber> emergencyNumbers = new ArrayList<>();
+        emergencyNumbers.add(new EmergencyNumber("123", "Main Ambulance"));
+        emergencyNumbers.add(new EmergencyNumber("126", "Tourist Police"));
+        emergencyNumbers.add(new EmergencyNumber("128", "Traffic Police"));
+        emergencyNumbers.add(new EmergencyNumber("122", "Emergency Police"));
+        emergencyNumbers.add(new EmergencyNumber("180", "Fire Department"));
+        emergencyNumbers.add(new EmergencyNumber("121", "Electricity Emergency"));
+        emergencyNumbers.add(new EmergencyNumber("129", "Natural Gas Emergency"));
+        emergencyNumbers.add(new EmergencyNumber("150", "Clock"));
+        emergencyNumbers.add(new EmergencyNumber("144", "International Calls from landlines"));
+        emergencyNumbers.add(new EmergencyNumber("177", "Landline telephone bills inquiries"));
+        emergencyNumbers.add(new EmergencyNumber("16", "Landline telephone complaints"));
+        emergencyNumbers.add(new EmergencyNumber("+2 2265-5000", "+2 2265-3333", "Cairo Airport (Terminal 1)"));
+        emergencyNumbers.add(new EmergencyNumber("+2 2265-2029", "+2 2265-2222", "Cairo Airport (Terminal 2)"));
+        emergencyNumbers.add(new EmergencyNumber("+2 2575-3555", "Railway Information"));
+        EmergencyNumbersAdapter adapter = new EmergencyNumbersAdapter(this, emergencyNumbers);
         recyclerView.setAdapter(adapter);
     }
 
@@ -70,12 +72,11 @@ public class EmergencyNumbersActivity extends AppCompatActivity {
     }
 
     public void callPhone(String phoneNumber) {
-        PermissionsHelper permissionsHelper = new PermissionsHelper(this);
-        if (permissionsHelper.isPermissionGranted(CALL_PHONE)) {
+        if (PermissionsHelper.isPermissionGranted(this, CALL_PHONE)) {
             startActivity(new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber)));
         } else {
             pendingPhone = phoneNumber;
-            permissionsHelper.requestPermission(CALL_PHONE, PermissionsHelper.CALL_PHONE_REQUEST);
+            PermissionsHelper.requestPermission(this, CALL_PHONE, PermissionsHelper.CALL_PHONE_REQUEST);
         }
     }
 

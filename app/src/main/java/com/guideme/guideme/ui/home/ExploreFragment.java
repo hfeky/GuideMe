@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+
+import com.guideme.guideme.R;
+import com.guideme.guideme.ui.trips.TripsActivity;
+import com.guideme.guideme.ui.common.AutoHideFAB;
 
 public class ExploreFragment extends Fragment {
 

@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.trips;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import androidx.fragment.app.Fragment;
+
+import com.guideme.guideme.R;
 
 public class PlaceAddFragment extends Fragment {
 

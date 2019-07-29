@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.common;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,13 +12,7 @@ public class PermissionsHelper {
 
     public static final int CALL_PHONE_REQUEST = 1000;
 
-    private Context context;
-
-    public PermissionsHelper(Context context) {
-        this.context = context;
-    }
-
-    public boolean isPermissionGranted(String permission) {
+    public static boolean isPermissionGranted(Context context, String permission) {
         int deviceVersion = Build.VERSION.SDK_INT;
         if (deviceVersion > Build.VERSION_CODES.LOLLIPOP_MR1) {
             int result = ContextCompat.checkSelfPermission(context, permission);
@@ -28,11 +22,11 @@ public class PermissionsHelper {
         }
     }
 
-    public void requestPermission(String permission, int requestCode) {
-        requestPermissions(new String[]{permission}, requestCode);
+    public static void requestPermission(Context context, String permission, int requestCode) {
+        requestPermissions(context, new String[]{permission}, requestCode);
     }
 
-    public void requestPermissions(String[] permissions, int requestCode) {
+    public static void requestPermissions(Context context, String[] permissions, int requestCode) {
         ActivityCompat.requestPermissions((Activity) context, permissions, requestCode);
     }
 }

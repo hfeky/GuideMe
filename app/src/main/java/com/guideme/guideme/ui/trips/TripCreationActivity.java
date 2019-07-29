@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.trips;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -27,6 +27,8 @@ import com.google.android.flexbox.FlexboxLayout;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.guideme.guideme.R;
+import com.guideme.guideme.ui.common.ViewPagerAdapter;
 
 public class TripCreationActivity extends AppCompatActivity {
 

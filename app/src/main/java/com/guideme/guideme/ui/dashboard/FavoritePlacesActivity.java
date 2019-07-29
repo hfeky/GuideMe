@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -8,16 +8,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class NotificationsActivity extends AppCompatActivity {
+import com.guideme.guideme.R;
+
+public class FavoritePlacesActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.layout_notifications);
+        setContentView(R.layout.layout_favorite_places);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        LinearLayout noNotification = findViewById(R.id.noNotification);
+        LinearLayout noFavoritePlaces = findViewById(R.id.noFavoritePlaces);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

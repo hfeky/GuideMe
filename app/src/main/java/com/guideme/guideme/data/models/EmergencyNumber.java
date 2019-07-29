@@ -1,14 +1,14 @@
-package com.guideme.guideme;
+package com.guideme.guideme.data.models;
 
-public class PhoneItem {
+public class EmergencyNumber {
 
     private String primaryPhone, secondaryPhone, title;
 
-    public PhoneItem(String phone, String title) {
+    public EmergencyNumber(String phone, String title) {
         this(phone, null, title);
     }
 
-    public PhoneItem(String primaryPhone, String secondaryPhone, String title) {
+    public EmergencyNumber(String primaryPhone, String secondaryPhone, String title) {
         this.primaryPhone = primaryPhone;
         this.secondaryPhone = secondaryPhone;
         this.title = title;

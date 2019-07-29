@@ -1,13 +1,15 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.guideme.guideme.R;
+import com.guideme.guideme.data.models.CommonPhrase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,17 +28,16 @@ public class CommonPhrasesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        List<PhraseItem> phraseItems = new ArrayList<>();
-        phraseItems.add(new PhraseItem("Hello", "صباح الفل", "Sabah al ful", R.drawable.phrase_hello));
-        phraseItems.add(new PhraseItem("Bye", "مع السلامة", "Ma'a el salama", R.drawable.phrase_bye));
-        phraseItems.add(new PhraseItem("Thank you", "شكرا", "Shukran", R.drawable.phrase_thanks));
-        phraseItems.add(new PhraseItem("Okay", "تمام", "Tamaam", R.drawable.phrase_okay));
-        phraseItems.add(new PhraseItem("No", "لا", "Laa", R.drawable.phrase_no));
-        phraseItems.add(new PhraseItem("Right here please", "على جمب لو سمحت", "Ala gamb lw samaht", R.drawable.phrase_right_here));
-        PhraseAdapter adapter = new PhraseAdapter(this, phraseItems);
+        List<CommonPhrase> commonPhrases = new ArrayList<>();
+        commonPhrases.add(new CommonPhrase("Hello", "صباح الفل", "Sabah al ful", R.drawable.phrase_hello));
+        commonPhrases.add(new CommonPhrase("Bye", "مع السلامة", "Ma'a el salama", R.drawable.phrase_bye));
+        commonPhrases.add(new CommonPhrase("Thank you", "شكرا", "Shukran", R.drawable.phrase_thanks));
+        commonPhrases.add(new CommonPhrase("Okay", "تمام", "Tamaam", R.drawable.phrase_okay));
+        commonPhrases.add(new CommonPhrase("No", "لا", "Laa", R.drawable.phrase_no));
+        commonPhrases.add(new CommonPhrase("Right here please", "على جمب لو سمحت", "Ala gamb lw samaht", R.drawable.phrase_right_here));
+        CommonPhrasesAdapter adapter = new CommonPhrasesAdapter(this, commonPhrases);
         recyclerView.setAdapter(adapter);
     }
 

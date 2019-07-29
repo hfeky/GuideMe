@@ -1,4 +1,4 @@
-package com.guideme.guideme;
+package com.guideme.guideme.ui.common;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;

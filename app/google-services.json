@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "454763084076",
+    "firebase_url": "https://guide-me-app.firebaseio.com",
+    "project_id": "guide-me-app",
+    "storage_bucket": "guide-me-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:454763084076:android:8262173919b857e0",
+        "android_client_info": {
+          "package_name": "com.guideme.guideme"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "454763084076-p7ttcehj3lalcl2kurcep4hg1hpjf745.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJxqy2BDGxlM0MDCGslb5xwx5u5AAPoak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "454763084076-p7ttcehj3lalcl2kurcep4hg1hpjf745.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
