@@ -38,12 +38,12 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.trips.TripsActivity"
+            android:name=".ui.trips_listing.TripsActivity"
             android:label="Trips"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.trips.TripCreationActivity"
+            android:name=".ui.trip_creation.TripCreationActivity"
             android:label="Trip Overview"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.AppBarOverlay" />

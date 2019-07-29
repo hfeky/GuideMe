@@ -18,7 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.guideme.guideme.R;
-import com.guideme.guideme.ui.trips.TripsActivity;
+import com.guideme.guideme.ui.trips_listing.TripsActivity;
 import com.guideme.guideme.ui.common.AutoHideFAB;
 import com.guideme.guideme.ui.common.ViewPagerAdapter;
 

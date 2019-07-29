@@ -45,6 +45,15 @@ class DataManager {
             }
     }
 
+    fun getCities(successListener: OnSuccessListener<QuerySnapshot>) {
+        db.collection("cities")
+            .get(source)
+            .addOnSuccessListener(successListener)
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
+
     fun getCity(cityId: String, successListener: OnSuccessListener<DocumentSnapshot>) {
         db.collection("cities")
             .document(cityId)

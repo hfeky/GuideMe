@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#EEEEEE</color>
     <color name="colorAccent">#00B8D4</color>
 
+    <color name="chipColor">#EBEBEB</color>
+
 </resources>
