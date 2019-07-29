@@ -1,4 +1,4 @@
-package com.guideme.guideme.ui.trips;
+package com.guideme.guideme.ui.trip_creation;
 
 
 import android.Manifest;
@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,29 +27,38 @@ import com.firebase.geofire.GeoQuery;
 import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
+import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.guideme.guideme.BuildConfig;
 import com.guideme.guideme.R;
 import com.uber.sdk.android.core.auth.LoginActivity;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class RequestTourGuideActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener  {
+public class RequestTourGuideActivity extends FragmentActivity implements GoogleMap.OnCameraChangeListener , PlaceSelectionListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener  {
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private Location lastLocation;
@@ -56,7 +66,9 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
     private RequestPermissionAction onPermissionCallBack;
     private final static int REQUEST_BULK_PERMISSION = 3006;
 
-    private Button logout, mRequest;
+    private String mPlaceName;
+
+    private Button mRequest;
 
     //pickup loc
     private LatLng pickupLoc;
@@ -68,6 +80,7 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
 
+        mRequest = findViewById(R.id.request);
         getBulkPermissions(permissions, new RequestPermissionAction() {
             @Override
             public void permissionDenied() {
@@ -78,20 +91,6 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
             @Override
             public void permissionGranted() {
                 // TODO: 5/27/2019 you code do further operations
-            }
-        });
-
-        logout = findViewById(R.id.logout);
-        mRequest = findViewById(R.id.request);
-
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(RequestTourGuideActivity.this, LoginActivity.class);
-                startActivity(intent);
-                finish();
-                return;
             }
         });
 
@@ -111,47 +110,36 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
             }
         });
 
+        // Initialize Places.
+        Places.initialize(getApplicationContext(), "AIzaSyBdCXqTL1firHWYqahfPkXCIoeMPlX6-II");
+        // Create a new Places client instance.
+        PlacesClient placesClient = Places.createClient(getApplicationContext());
+
+        // Initialize the AutocompleteSupportFragment.
+        final AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+
+//            autocompleteFragment.setHint(getString(R.string.select_location_search_bar));
+//        autocompleteFragment.setLocationRestriction(RectangularBounds.newInstance(
+//                new LatLng(34.7006096, 19.2477876),
+//                new LatLng(41.7488862, 29.7296986))); //Greece bounds
+        autocompleteFragment.setCountry("eg");
+
+
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG));
+
+
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(this);
+
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
     }
-
-
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
-//    @Override
-//    public void onMapReady(GoogleMap googleMap) {
-//
-//        mMap = googleMap;
-//
-//        try {
-//            // Customise the styling of the base map using a JSON object defined
-//            // in a raw resource file.
-//            boolean success = googleMap.setMapStyle(
-//                    MapStyleOptions.loadRawResourceStyle(
-//                            this, R.raw.mapstyle));
-//
-//            if (!success) {
-//                Log.e("mapstyle", "Style parsing failed.");
-//            }
-//        } catch (Resources.NotFoundException e) {
-//            Log.e("mapstyle", "Can't find style. Error: ", e);
-//        }
-//        // Add a marker in Sydney and move the camera
-//        LatLng sydney = new LatLng(-34, 151);
-//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-//    }
-
 
     private int radius = 1;
     private Boolean driverFound = false;
@@ -254,7 +242,7 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public void onMapReady(final GoogleMap googleMap) {
         mMap = googleMap;
         try {
             // Customise the styling of the base map using a JSON object defined
@@ -286,6 +274,31 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
                 return;
             }
         }
+        googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+
+            @Override
+            public void onMapClick(LatLng latLng) {
+
+                // Creating a marker
+                MarkerOptions markerOptions = new MarkerOptions();
+
+                // Setting the position for the marker
+                markerOptions.position(latLng);
+
+                // Setting the title for the marker.
+                // This will be displayed on taping the marker
+                markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+
+                // Clears the previously touched position
+                mMap.clear();
+
+                // Animating to the touched position
+                mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                // Placing a marker on the touched position
+                mMap.addMarker(markerOptions);
+            }
+        });
         buildGoogleApiClient();
         mMap.setMyLocationEnabled(true);
     }
@@ -297,12 +310,12 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
 
     @Override
     public void onLocationChanged(Location location) {
-        lastLocation = location;
-
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-        // to set the center of the screen point to the location
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
+//        lastLocation = location;
+//
+//        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+//        // to set the center of the screen point to the location
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(10));
 
     }
 
@@ -391,6 +404,34 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
             if (onPermissionCallBack != null)
                 onPermissionCallBack.permissionDenied();
         }
+    }
+
+    @Override
+    public void onPlaceSelected(@NonNull Place place) {
+        if (mMap == null) {
+            return;
+        }
+        final LatLng latLng = place.getLatLng();
+        System.out.println(latLng+"AAAAAAAAA");
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
+
+        mMap.setOnCameraChangeListener(this);
+    }
+
+    @Override
+    public void onError(@NonNull Status status) {
+        Log.e(BuildConfig.BUILD_TYPE, "onError: Status = " + status.toString());
+
+        Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
+                Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCameraChange(CameraPosition cameraPosition) {
+        mMap.clear();
+        mMap.addMarker(new MarkerOptions().position(cameraPosition.target).title(mPlaceName));
+
+        mMap.setOnCameraChangeListener(null);
     }
 
     public interface RequestPermissionAction {

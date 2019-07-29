@@ -1,4 +1,4 @@
-package com.guideme.guideme.ui.trips;
+package com.guideme.guideme.ui.trip_creation;
 
 
 import android.Manifest;
@@ -88,35 +88,35 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
                 // TODO: 5/27/2019 you code do further operations
             }
         });
+        // Initialize Places.
+        Places.initialize(getApplicationContext(), "AIzaSyBdCXqTL1firHWYqahfPkXCIoeMPlX6-II");
+        // Create a new Places client instance.
+        PlacesClient placesClient = Places.createClient(getApplicationContext());
 
-            // Initialize Places.
-            Places.initialize(getApplicationContext(), "AIzaSyBdCXqTL1firHWYqahfPkXCIoeMPlX6-II");
-            // Create a new Places client instance.
-            PlacesClient placesClient = Places.createClient(getApplicationContext());
-
-            // Initialize the AutocompleteSupportFragment.
-            final AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
+        // Initialize the AutocompleteSupportFragment.
+        final AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
+                getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
 
 //            autocompleteFragment.setHint(getString(R.string.select_location_search_bar));
 //        autocompleteFragment.setLocationRestriction(RectangularBounds.newInstance(
 //                new LatLng(34.7006096, 19.2477876),
 //                new LatLng(41.7488862, 29.7296986))); //Greece bounds
-            autocompleteFragment.setCountry("eg");
+        autocompleteFragment.setCountry("eg");
 
 
-            // Specify the types of place data to return.
-            autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG));
+        // Specify the types of place data to return.
+        autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG));
 
 
-            // Set up a PlaceSelectionListener to handle the response.
-            autocompleteFragment.setOnPlaceSelectedListener(this);
+        // Set up a PlaceSelectionListener to handle the response.
+        autocompleteFragment.setOnPlaceSelectedListener(this);
 
 
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
     }
 
     @Override
@@ -305,6 +305,7 @@ public class OrderTaxiActivity extends FragmentActivity implements GoogleMap.OnC
 
     @Override
     public void onCameraChange(CameraPosition cameraPosition) {
+        mMap.clear();
         mMap.addMarker(new MarkerOptions().position(cameraPosition.target).title(mPlaceName));
 
         mMap.setOnCameraChangeListener(null);

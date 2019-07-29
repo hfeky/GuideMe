@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.guideme.guideme"
     android:installLocation="preferExternal">
-
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -28,7 +27,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-
+        <activity android:name=".ui.trips_listing.TripsListing"></activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -39,13 +38,11 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".ui.trips.OrderCabActivity"
-            android:label="@string/title_activity_order_cab"></activity>
-        <activity android:name=".ui.trips.RequestTourGuideActivity" />
-        <activity android:name=".ui.trips.OrderTaxiActivity" />
+            android:value="@string/google_maps_key" /> <!-- <activity -->
+        <!-- android:name=".ui.trips.OrderCabActivity" -->
+        <!-- android:label="@string/title_activity_order_cab" /> -->
+        <activity android:name=".ui.trip_creation.RequestTourGuideActivity" />
+        <activity android:name=".ui.trip_creation.OrderTaxiActivity" />
         <activity
             android:name=".ui.authentication.LogInActivity"
             android:screenOrientation="portrait">
@@ -58,17 +55,14 @@
         <activity
             android:name=".ui.authentication.SignUpActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.authentication.TermsAndConditionsActivity"
             android:label="Terms and Conditions"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.home.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.trips_listing.TripsActivity"
             android:label="Trips"
