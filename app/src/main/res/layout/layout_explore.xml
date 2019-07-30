@@ -1,6 +1,5 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -154,7 +153,6 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -249,7 +247,7 @@
             android:orientation="horizontal">
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/sahelCity"
+                android:id="@+id/northCoastCity"
                 android:layout_width="0dp"
                 android:layout_height="150dp"
                 android:layout_marginEnd="4dp"
@@ -262,7 +260,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/frame_el_sahel" />
+                    android:src="@drawable/frame_north_coast" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -277,7 +275,7 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="4dp"
                         android:paddingEnd="4dp"
-                        android:text="El Sahel"
+                        android:text="North Coast"
                         android:textColor="#FFFFFF"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -337,14 +335,14 @@
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chip_group"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
 
-        </com.google.android.material.chip.ChipGroup>
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chipGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>

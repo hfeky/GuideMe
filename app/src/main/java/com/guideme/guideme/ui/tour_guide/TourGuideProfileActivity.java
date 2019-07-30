@@ -1,6 +1,7 @@
 package com.guideme.guideme.ui.tour_guide;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,9 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.brouding.simpledialog.SimpleDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.models.TourGuide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TourGuideProfileActivity extends AppCompatActivity {
@@ -80,6 +84,18 @@ public class TourGuideProfileActivity extends AppCompatActivity {
                         .show();
             }
         });
+
+        ChipGroup chipGroup = findViewById(R.id.chip_group);
+
+        List<String> activities = guide.getActivities();
+        ArrayList<Chip> chips = new ArrayList<>();
+        for(int i = 0;i<activities.size();i++){
+            Chip chip = (Chip) LayoutInflater.from(this).inflate(R.layout.item_trip_tag, null, false);
+            chip.setClickable(true);
+            chip.setText(activities.get(i));
+            chips.add(chip);
+            chipGroup.addView(chips.get(i));
+        }
     }
 
     @Override

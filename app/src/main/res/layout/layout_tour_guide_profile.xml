@@ -148,6 +148,16 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 tools:text="Tour guide's rating" />
+            <TextView
+                android:id="@+id/perksLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Guide's Perks" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -155,6 +165,25 @@
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:padding="4dp" />
+
+            <TextView
+                android:id="@+id/guideActivities"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Tour guide's activities" />
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp">
+
+            </com.google.android.material.chip.ChipGroup>
+
 
             <Button
                 android:id="@+id/bookButton"
@@ -164,7 +193,6 @@
                 android:layout_marginTop="30dp"
                 android:text="Book Now"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

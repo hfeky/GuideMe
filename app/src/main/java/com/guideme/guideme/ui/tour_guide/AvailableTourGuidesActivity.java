@@ -56,8 +56,14 @@ public class AvailableTourGuidesActivity extends AppCompatActivity {
                     double rating = (Double) document.get("rating");
                     String origin = (String) document.get("origin");
                     List<String> perks = (List<String>) document.get("perks");
-                    if(selectedC.contains(origin))
-                        guides.add(new TourGuide(name, phoneNumber, photo, rating, origin, perks));
+                    List<String> activities = (List<String>) document.get("activities");
+                    if((selectedC.contains(origin)||selectedC.isEmpty()))
+                        for(String activity: activities) {
+                            if (selectedT.contains(activity)||selectedT.isEmpty()) {
+                                guides.add(new TourGuide(name, phoneNumber, photo, rating, origin, perks, activities));
+                                break;
+                            }
+                        }
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
             }

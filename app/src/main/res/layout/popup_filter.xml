@@ -90,7 +90,7 @@
                 android:textStyle="bold" />
 
             <Spinner
-                android:id="@+id/categorySpinner"
+                android:id="@+id/tagSpinner"
                 android:layout_width="wrap_content"
                 android:entries="@array/tags"
                 android:layout_height="wrap_content"

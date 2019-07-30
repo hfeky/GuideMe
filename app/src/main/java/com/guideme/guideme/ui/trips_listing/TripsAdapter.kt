@@ -40,6 +40,7 @@ class TripsAdapter(
         holder.itemView.tripTags.removeAllViews()
         for (tag in trip.tags) {
             val chip = LayoutInflater.from(context).inflate(R.layout.item_trip_tag, null, false) as Chip
+            chip.isEnabled = false
             chip.text = tag
             holder.itemView.tripTags.addView(chip)
         }
