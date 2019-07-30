@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.DataManager;
+import com.guideme.guideme.data.models.Restaurant;
 import com.guideme.guideme.data.models.TourGuide;
 
 import java.util.ArrayList;
