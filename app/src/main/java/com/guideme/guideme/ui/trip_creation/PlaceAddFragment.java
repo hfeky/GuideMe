@@ -21,7 +21,7 @@ public class PlaceAddFragment extends Fragment {
         addPlaceButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ((TripCreationActivity) getActivity()).showPlacePicker();
             }
         });
 

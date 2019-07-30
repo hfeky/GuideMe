@@ -139,4 +139,13 @@ class DataManager {
                 Log.d(TAG, "Error getting documents: ", exception)
             }
     }
+
+    fun getTourGuides(successListener: OnSuccessListener<QuerySnapshot>) {
+        db.collection("tour_guides")
+            .get(source)
+            .addOnSuccessListener(successListener)
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
 }

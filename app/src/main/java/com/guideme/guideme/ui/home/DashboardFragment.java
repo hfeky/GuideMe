@@ -17,9 +17,7 @@ import com.guideme.guideme.R;
 import com.guideme.guideme.ui.common.WeatherCard;
 import com.guideme.guideme.ui.common.AutoHideFAB;
 import com.guideme.guideme.ui.dashboard.BookRideActivity;
-import com.guideme.guideme.ui.dashboard.RequestTourGuideActivity;
-import com.guideme.guideme.ui.trips_listing.TripsListing;
-import com.uber.sdk.android.rides.RideRequestActivity;
+import com.guideme.guideme.ui.dashboard.AvailableTourGuidesActivity;
 
 public class DashboardFragment extends Fragment {
 
@@ -41,7 +39,7 @@ public class DashboardFragment extends Fragment {
         requestTourGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), RequestTourGuideActivity.class));
+                startActivity(new Intent(getContext(), AvailableTourGuidesActivity.class));
             }
         });
 
@@ -62,7 +60,7 @@ public class DashboardFragment extends Fragment {
         bookARide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), TripsListing.class));
+                startActivity(new Intent(getContext(), BookRideActivity.class));
             }
         });
 

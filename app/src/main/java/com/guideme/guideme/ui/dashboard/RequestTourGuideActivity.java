@@ -1,6 +1,5 @@
 package com.guideme.guideme.ui.dashboard;
 
-
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -48,7 +47,8 @@ import com.uber.sdk.android.core.auth.LoginActivity;
 import java.util.HashMap;
 import java.util.List;
 
-public class RequestTourGuideActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener  {
+public class RequestTourGuideActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
     private Location lastLocation;
@@ -425,5 +425,3 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
         super.onStop();
     }
 }
-
-

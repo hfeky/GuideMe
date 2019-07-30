@@ -5,28 +5,26 @@ import android.os.Parcelable
 
 data class TourGuide(
     val name: String,
-    val avatar: Int,
+    val photo: String,
     val rating: Double,
-    val places: List<String>
+    val origin: String,
+    val perks: List<String>
 ) : Parcelable {
-
-    var facilities: List<String>? = null
 
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
-        parcel.readInt(),
+        parcel.readString()!!,
         parcel.readDouble(),
+        parcel.readString()!!,
         parcel.createStringArrayList()!!
-    ) {
-        facilities = parcel.createStringArrayList()
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(name)
-        parcel.writeInt(avatar)
+        parcel.writeString(photo)
         parcel.writeDouble(rating)
-        parcel.writeStringList(places)
-        parcel.writeStringList(facilities)
+        parcel.writeString(origin)
+        parcel.writeStringList(perks)
     }
 
     override fun describeContents(): Int {

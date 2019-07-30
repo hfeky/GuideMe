@@ -10,7 +10,7 @@ data class Trip(
     val description: String,
     val photo: String? = null,
     val tags: List<String>,
-    val places: ArrayList<Place>
+    val places: ArrayList<TripPlace>
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -20,7 +20,7 @@ data class Trip(
         parcel.readString()!!,
         parcel.readString(),
         parcel.createStringArrayList()!!,
-        parcel.createTypedArrayList(Place)) {
+        parcel.createTypedArrayList(TripPlace)) {
     }
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {

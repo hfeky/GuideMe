@@ -18,8 +18,6 @@ class TripsAdapter(
     private val trips: List<Trip>
 ) : RecyclerView.Adapter<TripsAdapter.ViewHolder>() {
 
-    private var tags = arrayListOf<String>()
-
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
