@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                tools:text="Good Morning" />
+                android:text="Good Morning" />
 
             <TextView
                 android:id="@+id/username"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp"
-                tools:text="Hussein El Feky" />
+                android:text="Hussein El Feky" />
 
         </LinearLayout>
 
@@ -50,7 +50,7 @@
                 android:id="@+id/weatherIcon"
                 android:layout_width="40sp"
                 android:layout_height="40sp"
-                tools:src="@drawable/weather_cloudy" />
+                android:src="@drawable/weather_cloudy" />
 
             <TextView
                 android:id="@+id/weatherToday"
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                tools:text="21 C" />
+                android:text="21 C" />
 
         </LinearLayout>
 
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                tools:text="Sun" />
+                android:text="Sun" />
 
             <TextView
                 android:id="@+id/weather1"
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                tools:text="20 C" />
+                android:text="20 C" />
 
         </LinearLayout>
 
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                tools:text="Mon" />
+                android:text="Mon" />
 
             <TextView
                 android:id="@+id/weather2"
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                tools:text="20 C" />
+                android:text="20 C" />
 
         </LinearLayout>
 
@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                tools:text="Tue" />
+                android:text="Tue" />
 
             <TextView
                 android:id="@+id/weather3"
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                tools:text="20 C" />
+                android:text="20 C" />
 
         </LinearLayout>
 
@@ -158,7 +158,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                tools:text="Wed" />
+                android:text="Wed" />
 
             <TextView
                 android:id="@+id/weather4"
@@ -166,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                tools:text="20 C" />
+                android:text="20 C" />
 
         </LinearLayout>
 
@@ -183,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp"
-                tools:text="Thu" />
+                android:text="Thu" />
 
             <TextView
                 android:id="@+id/weather5"
@@ -191,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                tools:text="20 C" />
+                android:text="20 C" />
 
         </LinearLayout>
 
@@ -207,7 +207,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
-                tools:text="Fri" />
+                android:text="Fri" />
 
             <TextView
                 android:id="@+id/weather6"
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                tools:text="20 C" />
+                android:text="20 C" />
 
         </LinearLayout>
 

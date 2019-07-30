@@ -8,7 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -81,6 +83,12 @@ public class TourGuideProfileActivity extends AppCompatActivity {
                         .setBtnConfirmTextColor("#1fd1ab")
                         .setBtnCancelText("Cancel", false)
                         .setBtnCancelTextColor("#555555")
+                        .onConfirm(new SimpleDialog.BtnCallback() {
+                            @Override
+                            public void onClick(@NonNull SimpleDialog dialog, @NonNull SimpleDialog.BtnAction which) {
+                                Toast.makeText(TourGuideProfileActivity.this, "Message Sent", Toast.LENGTH_SHORT).show();
+                            }
+                        })
                         .show();
             }
         });
