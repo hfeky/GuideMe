@@ -1,6 +1,7 @@
 package com.guideme.guideme.ui.tour_guide;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,7 +22,8 @@ import java.util.List;
 public class AvailableTourGuidesActivity extends AppCompatActivity {
 
     private DataManager dataManager = new DataManager();
-
+    ArrayList<String> selectedT;
+    ArrayList<String> selectedC;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,9 @@ public class AvailableTourGuidesActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
+        Bundle b = getIntent().getExtras();
+        selectedC = b.getStringArrayList("cities");
+        selectedT = b.getStringArrayList("tags");
         final List<TourGuide> guides = new ArrayList<>();
         final List<String> trips = new ArrayList<>();
         trips.add("Giza Necopolis");
@@ -51,7 +56,8 @@ public class AvailableTourGuidesActivity extends AppCompatActivity {
                     double rating = (Double) document.get("rating");
                     String origin = (String) document.get("origin");
                     List<String> perks = (List<String>) document.get("perks");
-                    guides.add(new TourGuide(name, phoneNumber, photo, rating, origin, perks));
+                    if(selectedC.contains(origin))
+                        guides.add(new TourGuide(name, phoneNumber, photo, rating, origin, perks));
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
