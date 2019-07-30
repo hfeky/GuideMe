@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.models.TripPlace;
 import com.guideme.guideme.ui.tour_guide.ChooseFilters;
-import com.guideme.guideme.ui.trip_creation.RestaurantActivity;
+import com.guideme.guideme.ui.trip_creation.RestaurantsActivity;
 import com.guideme.guideme.ui.trip_creation.TripOverviewActivity;
 
 import java.util.ArrayList;
@@ -32,10 +32,12 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
 
     private ArrayList<String> arr = new ArrayList<>();
 
-    private ArrayList<TripPlace> places = new ArrayList<>();
+    private ArrayList<TripPlace> places;
+    private String cityId;
 
-    public VerticalStepperAdapterFragment(ArrayList<TripPlace> places) {
+    public VerticalStepperAdapterFragment(ArrayList<TripPlace> places, String cityId) {
         this.places = places;
+        this.cityId = cityId;
     }
 
     @Override
@@ -101,11 +103,10 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mVerticalStepperView.nextStep();
                 if (index == 1) {
-                    Intent intent = new Intent(getContext(), RestaurantActivity.class);
-                    intent.putExtra("city_id", ((TripOverviewActivity) context).getIntent().getExtras().getString("city_id"));
+                    Intent intent = new Intent(getContext(), RestaurantsActivity.class);
+                    intent.putExtra("city_id", cityId);
                     startActivity(intent);
                 } else if (index == 3) {
                     startActivity(new Intent(getContext(), ChooseFilters.class));
@@ -117,7 +118,10 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
         inflateView.findViewById(R.id.button_prev).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mVerticalStepperView.prevStep();
+                mVerticalStepperView.nextStep();
+                if (index == 3) {
+                    ((TripOverviewActivity) context).enableDoneButton();
+                }
             }
         });
         return inflateView;
