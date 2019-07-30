@@ -1,5 +1,6 @@
 package com.guideme.guideme.ui.trip_creation
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -12,6 +13,8 @@ import androidx.palette.graphics.Palette
 import com.guideme.guideme.R
 import com.guideme.guideme.data.models.TripPlace
 import com.guideme.guideme.ui.common.DateUtils
+import com.guideme.guideme.ui.dashboard.FavoritePlacesActivity
+import io.paperdb.Paper
 import kotlinx.android.synthetic.main.layout_place.*
 import java.util.*
 
@@ -26,7 +29,11 @@ class PlaceFragment : Fragment() {
 
     private var location: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.layout_place, container, false)
         context = getContext() as TripCreationActivity?
         return view
@@ -66,7 +73,20 @@ class PlaceFragment : Fragment() {
 
         shareButton.setOnClickListener { }
 
-        favoriteButton.setOnClickListener { }
+        favoriteButton.setOnClickListener {
+          //  val intent = Intent(context, FavoritePlacesActivity::class.java)
+          //  intent.putExtra("place", place)
+            Paper.init(context)
+            var trips: ArrayList<TripPlace>? = Paper.book().read<ArrayList<TripPlace>>("trips")
+            if (trips == null) {
+                trips = ArrayList()
+            }
+            if (place != null)
+                trips.add(place!!)
+            Paper.book().write("trips", trips)
+
+            //startActivity(intent)
+        }
     }
 
     override fun onStart() {
