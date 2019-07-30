@@ -16,7 +16,6 @@ import com.guideme.guideme.data.models.TripPlace
 import com.guideme.guideme.ui.trip_creation.TripCreationActivity
 import kotlinx.android.synthetic.main.layout_trips.*
 import kotlinx.android.synthetic.main.popup_filter.view.*
-import java.util.*
 
 class TripsActivity : AppCompatActivity() {
 
@@ -26,7 +25,7 @@ class TripsActivity : AppCompatActivity() {
 
     private var filterPopup: PopupWindow? = null
     private var selectedCity: Int = 0
-    private var selectedCategory: Int = 0
+    private var selectedTag: String = "All tags"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +39,7 @@ class TripsActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             selectedCity = bundle.getInt("city", 0)
-            selectedCategory = bundle.getInt("category", 0)
+            selectedTag = bundle.getString("tag", "all tags")
         }
 
         createFab.setupWithRecyclerView(recyclerView)
@@ -84,20 +83,23 @@ class TripsActivity : AppCompatActivity() {
         filterPopup = PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,
             ViewGroup.LayoutParams.WRAP_CONTENT)
 
+        val tags = arrayListOf<String>()
+        tags.addAll(resources.getStringArray(R.array.tags))
+
         view.citySpinner.setSelection(selectedCity)
-        view.categorySpinner.setSelection(selectedCategory)
+        view.tagSpinner.setSelection(tags.indexOf(selectedTag))
 
         view.closeIcon.setOnClickListener { filterPopup!!.dismiss() }
 
         view.resetFilterButton.setOnClickListener {
             view.citySpinner.setSelection(0)
-            view.categorySpinner.setSelection(0)
+            view.tagSpinner.setSelection(0)
         }
 
         view.applyFiltersButton.setOnClickListener {
             filterPopup!!.dismiss()
             selectedCity = view.citySpinner.selectedItemPosition
-            selectedCategory = view.categorySpinner.selectedItemPosition
+            selectedTag = view.tagSpinner.selectedItem.toString()
         }
 
         filterPopup!!.animationStyle = R.style.PopupAnimation

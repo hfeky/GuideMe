@@ -3,23 +3,48 @@
     <string-array name="cities">
         <item>All cities</item>
         <item>Alexandria</item>
+        <item>Aswan</item>
         <item>Cairo</item>
         <item>El Sahel</item>
+        <item>Fayyoum</item>
         <item>Giza</item>
+        <item>Hurghada</item>
         <item>Luxor</item>
+        <item>Marsa Matruh</item>
+        <item>North Coast</item>
         <item>Sharm El-Sheikh</item>
+        <item>Sharqia</item>
+        <item>Siwa</item>
+        <item>Taba</item>
     </string-array>
 
     <string-array name="tags">
         <item>All tags</item>
+        <item>bicycling</item>
+        <item>bowling</item>
         <item>camping</item>
         <item>culture</item>
+        <item>diving</item>
+        <item>ferry</item>
+        <item>golf</item>
         <item>hiking</item>
         <item>history</item>
-        <item>Sea</item>
-        <item>shopping</item>
-        <item>wind surfing</item>
+        <item>kite-surfing</item>
         <item>landmark</item>
+        <item>nature</item>
+        <item>recreation</item>
+        <item>safari</item>
+        <item>sand-boarding</item>
+        <item>sand-volley</item>
+        <item>sea</item>
+        <item>shopping</item>
+        <item>snorkeling</item>
+        <item>squash</item>
+        <item>stargazing</item>
+        <item>swimming</item>
+        <item>tennis</item>
+        <item>windsurfing</item>
+        <item>yacht</item>
     </string-array>
 
 </resources>
