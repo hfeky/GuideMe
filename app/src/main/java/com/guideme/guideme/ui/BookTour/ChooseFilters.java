@@ -1,4 +1,4 @@
-package com.guideme.guideme.ui.trips;
+package com.guideme.guideme.ui.BookTour;
 
 import android.os.Bundle;
 

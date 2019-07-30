@@ -30,10 +30,7 @@
         <activity
             android:name=".ui.authentication.LogInActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -48,7 +45,13 @@
         <activity
             android:name=".ui.home.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <activity
             android:name=".ui.trips_listing.TripsActivity"
@@ -88,6 +91,13 @@
             android:name=".ui.home.NotificationsActivity"
             android:label="Notifications"
             android:screenOrientation="portrait" />
+
+
+        <activity android:name=".ui.BookTour.ChooseFilters"
+            android:label="Trip Preferences"
+            >
+
+        </activity>
 
     </application>
 
