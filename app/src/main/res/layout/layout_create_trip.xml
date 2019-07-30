@@ -79,11 +79,34 @@
         android:layout_height="1px"
         android:background="#000000" />
 
-    <com.google.android.flexbox.FlexboxLayout
-        android:id="@+id/pageIndicators"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_gravity="center"
-        app:flexWrap="wrap" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+
+        <Button
+            android:id="@+id/setDateButton"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:text="Set Date" />
+
+        <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/pageIndicators"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            app:flexWrap="wrap"
+            app:justifyContent="center" />
+
+        <Button
+            android:id="@+id/overviewButton"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:enabled="false"
+            android:text="Overview" />
+
+    </LinearLayout>
 
 </LinearLayout>
