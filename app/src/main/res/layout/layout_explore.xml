@@ -154,6 +154,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -332,197 +333,18 @@
             android:layout_marginBottom="8dp"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:text="Browse By Category"
+            android:text="Browse By Tag"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold" />
-
-        <LinearLayout
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/seaCategory"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="4dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="#2196F3" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/toolbar_font"
-                    android:gravity="center"
-                    android:text="Sea"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp" />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/shoppingCategory"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="4dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="#FF5722" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/toolbar_font"
-                    android:gravity="center"
-                    android:text="Shopping"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp" />
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cultureCategory"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="4dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="#4CAF50" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/toolbar_font"
-                    android:gravity="center"
-                    android:text="Culture"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp" />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/historyCategory"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="4dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="#009688" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/toolbar_font"
-                    android:gravity="center"
-                    android:text="History"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp" />
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:orientation="horizontal">
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/campingCategory"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="4dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="#FFC107" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/toolbar_font"
-                    android:gravity="center"
-                    android:text="Camping"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp" />
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/hikingCategory"
-                android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_weight="1"
-                android:foreground="?attr/selectableItemBackground"
-                app:cardCornerRadius="4dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:src="#F44336" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:fontFamily="@font/toolbar_font"
-                    android:gravity="center"
-                    android:text="Hiking"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp" />
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
+        </com.google.android.material.chip.ChipGroup>
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
