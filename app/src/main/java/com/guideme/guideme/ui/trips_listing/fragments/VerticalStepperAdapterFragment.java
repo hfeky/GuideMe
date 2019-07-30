@@ -109,7 +109,10 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
                     intent.putExtra("city_id", cityId);
                     startActivity(intent);
                 } else if (index == 3) {
-                    startActivity(new Intent(getContext(), ChooseFilters.class));
+                    startActivity(new Intent(getContext(), ChooseFilters.class).putExtra("lady_gege", "ge"));
+                }
+                else if(index == 4){
+
                 }
             }
         });
