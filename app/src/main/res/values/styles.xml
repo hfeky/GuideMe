@@ -27,11 +27,16 @@
         <item name="android:paddingRight">16dp</item>
     </style>
 
-    <style name="AppTheme.NoActionBar">
+    <style name="PingThemeBase" parent="Theme.MaterialComponents.Light">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowBackground">@color/colorBackgroundLight</item>
+        <item name="colorPrimary">#00B8D4</item>
+        <item name="colorPrimaryDark">#0097A7</item>
+        <item name="colorAccent">#DD2C00</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
     </style>
-
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

@@ -10,7 +10,6 @@ import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
-import com.guideme.guideme.ui.BookTour.ChooseFilters;
 import com.guideme.guideme.ui.dashboard.CommonPhrasesActivity;
 import com.guideme.guideme.ui.dashboard.EmergencyNumbersActivity;
 import com.guideme.guideme.ui.dashboard.FavoritePlacesActivity;
@@ -18,7 +17,7 @@ import com.guideme.guideme.R;
 import com.guideme.guideme.ui.common.WeatherCard;
 import com.guideme.guideme.ui.common.AutoHideFAB;
 import com.guideme.guideme.ui.dashboard.BookRideActivity;
-import com.guideme.guideme.ui.dashboard.RequestTourGuideActivity;
+import com.guideme.guideme.ui.dashboard.AvailableTourGuidesActivity;
 
 public class DashboardFragment extends Fragment {
 
@@ -40,7 +39,7 @@ public class DashboardFragment extends Fragment {
         requestTourGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), ChooseFilters.class));
+                startActivity(new Intent(getContext(), AvailableTourGuidesActivity.class));
             }
         });
 

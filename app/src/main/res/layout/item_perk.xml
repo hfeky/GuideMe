@@ -1,0 +1,23 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardCornerRadius="4dp">
+
+    <TextView
+        android:id="@+id/perk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:drawableStart="@drawable/ic_star_black"
+        android:drawableLeft="@drawable/ic_star_black"
+        android:drawablePadding="4dp"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        tools:text="Single Perk" />
+
+</androidx.cardview.widget.CardView>
