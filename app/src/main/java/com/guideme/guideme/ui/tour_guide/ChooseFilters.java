@@ -50,7 +50,7 @@ public class ChooseFilters extends AppCompatActivity implements AdapterView.OnIt
             public void onClick(View view) {
                 Bundle b = new Bundle();
                 b.putStringArrayList("tags", selectedT);
-                b.putStringArrayList("city", selectedC);
+                b.putStringArrayList("cities", selectedC);
                 ActivityOptions options =
                         ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.slide_on, R.anim.slide_off);
                 startActivity(new Intent(ChooseFilters.this, AvailableTourGuidesActivity.class).putExtras(b), options.toBundle());
@@ -76,25 +76,19 @@ public class ChooseFilters extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String text = parent.getItemAtPosition(position).toString();
-        if (flagC && text.equals("Snorkelling")) {
-            flagC = false;
-            return;
-        } else if (flagT && text.equals("Alexandria")) {
-            flagT = false;
-            return;
-        } else {
-            for (String s : cities) {
-                if (s.equals(text) && !selectedC.contains(text)) {
-                    selectedC.add(text);
-                }
+
+        for (String s : cities) {
+            if (s.equals(text) && !selectedC.contains(text)) {
+                selectedC.add(text);
             }
 
+        }
             for (String s : labels) {
                 if (s.equals(text) && !selectedT.contains(text)) {
                     selectedT.add(text);
                 }
             }
-        }
+
 
         String dispC = "Selected Cities: \n\n";
         String dispT = "Selected Activities: \n\n";
