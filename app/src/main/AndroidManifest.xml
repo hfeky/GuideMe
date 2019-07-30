@@ -52,7 +52,11 @@
 
         <activity
             android:name=".ui.trips_listing.TripsActivity"
-            android:label="Trips"
+            android:label="Explore Trips"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.trip_creation.TripCreationActivity"
             android:screenOrientation="portrait" />
 
         <activity
