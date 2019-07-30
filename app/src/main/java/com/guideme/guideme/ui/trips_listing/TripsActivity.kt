@@ -80,8 +80,10 @@ class TripsActivity : AppCompatActivity() {
 
     private fun showFilterPopup() {
         val view = layoutInflater.inflate(R.layout.popup_filter, null)
-        filterPopup = PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT)
+        filterPopup = PopupWindow(
+            view, ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
 
         val tags = arrayListOf<String>()
         tags.addAll(resources.getStringArray(R.array.tags))
@@ -129,6 +131,7 @@ class TripsActivity : AppCompatActivity() {
                     city.trips.add(
                         Trip(
                             document.id,
+                            document.get("city_id") as String,
                             document.get("name") as String,
                             city.name,
                             document.get("description") as String,

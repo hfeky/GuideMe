@@ -5,6 +5,7 @@ import android.os.Parcelable
 
 data class Trip(
     val tripId: String,
+    val cityId: String,
     val name: String,
     val location: String,
     val description: String,
@@ -18,13 +19,15 @@ data class Trip(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readString(),
         parcel.createStringArrayList()!!,
-        parcel.createTypedArrayList(TripPlace)) {
-    }
+        parcel.createTypedArrayList(TripPlace)!!
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(tripId)
+        parcel.writeString(cityId)
         parcel.writeString(name)
         parcel.writeString(location)
         parcel.writeString(description)
