@@ -108,6 +108,10 @@ class TripCreationActivity : AppCompatActivity() {
             placeImage!!.setImageDrawable(null)
         }
 
+        if (adapter.count > 0) {
+            setDateButton.isEnabled = true
+            overviewButton.isEnabled = true
+        }
         addFragment(fragment = PlaceAddFragment())
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -140,6 +144,10 @@ class TripCreationActivity : AppCompatActivity() {
         pageIndicators.getChildAt(0).isSelected = true
 
         editFab.setOnClickListener {
+
+        }
+
+        setDateButton.setOnClickListener {
             val placeFragment = (viewPager.adapter as ViewPagerAdapter).getItem(viewPager.currentItem) as PlaceFragment
 
             val datePickerDialog = DatePickerDialog(this@TripCreationActivity, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
@@ -155,6 +163,20 @@ class TripCreationActivity : AppCompatActivity() {
             )
 
             datePickerDialog.show()
+        }
+
+        overviewButton.setOnClickListener {
+            val intent = Intent(this, TripOverviewActivity::class.java)
+            val places = arrayListOf<TripPlace>()
+
+            for (fragment in adapter.fragments) {
+                if (fragment is PlaceFragment) {
+                    places.add(fragment.place!!)
+                }
+            }
+
+            intent.putExtra("places", places)
+            startActivity(intent)
         }
     }
 
@@ -229,7 +251,7 @@ class TripCreationActivity : AppCompatActivity() {
 
                 val place = TripPlace(selectedPlace.id!!, selectedPlace.name!!, null, adapter.count)
                 trip.places.add(place)
-                bundle.putParcelable("place", place);
+                bundle.putParcelable("place", selectedPlace)
                 if (trip.location.isEmpty()) {
                     bundle.putString("location", "Egypt")
                 } else {
