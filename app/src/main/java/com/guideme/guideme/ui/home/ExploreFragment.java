@@ -28,7 +28,7 @@ public class ExploreFragment extends Fragment {
         CardView alexandriaCity = view.findViewById(R.id.alexandriaCity);
         CardView gizaCity = view.findViewById(R.id.gizaCity);
         CardView luxorCity = view.findViewById(R.id.luxorCity);
-        CardView sahelCity = view.findViewById(R.id.northCoastCity);
+        CardView northCoastCity = view.findViewById(R.id.northCoastCity);
         CardView sharmCity = view.findViewById(R.id.sharmCity);
 
         ChipGroup chipGroup = view.findViewById(R.id.chipGroup);
@@ -80,7 +80,7 @@ public class ExploreFragment extends Fragment {
             }
         });
 
-        sahelCity.setOnClickListener(new View.OnClickListener() {
+        northCoastCity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), TripsActivity.class);
