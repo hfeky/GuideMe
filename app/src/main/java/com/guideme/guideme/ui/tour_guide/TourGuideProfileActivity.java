@@ -3,6 +3,8 @@ package com.guideme.guideme.ui.tour_guide;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.brouding.simpledialog.SimpleDialog;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.guideme.guideme.R;
@@ -25,6 +28,7 @@ public class TourGuideProfileActivity extends AppCompatActivity {
     private TextView guideRating;
     private ImageView guideAvatar;
     private TextView guidePerksCount;
+    private Button bookButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +49,7 @@ public class TourGuideProfileActivity extends AppCompatActivity {
         guideRating = findViewById(R.id.guideRating);
         guideAvatar = findViewById(R.id.avatar);
         guidePerksCount = findViewById(R.id.guidePerksCount);
-
+        bookButton = findViewById(R.id.bookButton);
         guideName.setText(guide.getName());
         guidePhone.setText(guide.getPhoneNumber());
         guideRating.setText(guide.getName() + " has a rating of " + guide.getRating() + " stars");
@@ -61,6 +65,21 @@ public class TourGuideProfileActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(new PerksAdapter(this, perks));
+        bookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new SimpleDialog.Builder(TourGuideProfileActivity.this)
+                        .setTitle("Select a Trip!")
+                        // If the customView is long enough, SimpleDialog will put your layout in the ScrollView automatically
+                        .setCustomView(R.layout.layout_booking_dialog)
+                        .setBtnConfirmText("Confirm and request")
+                        .setBtnConfirmTextSizeDp(16)
+                        .setBtnConfirmTextColor("#1fd1ab")
+                        .setBtnCancelText("Cancel", false)
+                        .setBtnCancelTextColor("#555555")
+                        .show();
+            }
+        });
     }
 
     @Override
