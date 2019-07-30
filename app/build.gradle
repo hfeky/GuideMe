@@ -54,6 +54,8 @@ dependencies {
         exclude group: 'com.google.android.material'
     }
 
+    implementation 'com.instabug.library:instabug:8.5.0'
+
     implementation 'com.firebase:geofire-android:2.1.1'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
 
