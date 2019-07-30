@@ -73,7 +73,7 @@ class PlaceFragment : Fragment() {
         }
 
         Paper.init(context)
-        var favoritedPlaces = Paper.book().read("trips") as ArrayList<TripPlace>?
+        var favoritedPlaces = Paper.book().read("favorite_places") as ArrayList<TripPlace>?
         var isFavorited = false
         if (favoritedPlaces != null) {
             for (i in 0 until favoritedPlaces.size) {
@@ -92,7 +92,7 @@ class PlaceFragment : Fragment() {
         shareButton.setOnClickListener { }
 
         favoriteButton.setOnClickListener {
-            var favoritedPlaces = Paper.book().read("trips") as ArrayList<TripPlace>?
+            var favoritedPlaces = Paper.book().read("favorite_places") as ArrayList<TripPlace>?
             var isFavorited = false
 
             if (favoritedPlaces != null) {
@@ -112,12 +112,12 @@ class PlaceFragment : Fragment() {
                 if (place != null) {
                     favoritedPlaces.add(place!!)
                 }
-                favoriteButton.setImageResource(R.drawable.ic_heart_bordered)
-            } else {
                 favoriteButton.setImageResource(R.drawable.ic_heart_filled)
+            } else {
+                favoriteButton.setImageResource(R.drawable.ic_heart_bordered)
             }
 
-            Paper.book().write("trips", favoritedPlaces)
+            Paper.book().write("favorite_places", favoritedPlaces)
         }
     }
 

@@ -2,6 +2,7 @@ package com.guideme.guideme.ui.dashboard;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,16 +24,12 @@ public class FavoritePlacesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_favorite_places);
 
-        TripPlace place = getIntent().getParcelableExtra("place");
         Paper.init(this);
-        ArrayList<TripPlace> trips = Paper.book().read("trips");
-        if(trips==null){
+        ArrayList<TripPlace> trips = Paper.book().read("favorite_places");
+        if (trips == null) {
             trips = new ArrayList<>();
         }
-//        if(place!=null)
-//            trips.add(place);
-//        Paper.book().write("trips", trips);
-        //TODO TEST THE FUCK OUT OF THIS CODE
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LinearLayout noFavoritePlaces = findViewById(R.id.noFavoritePlaces);
@@ -43,6 +40,10 @@ public class FavoritePlacesActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new FavouriteAdapter(this, trips));
+
+        if (recyclerView.getAdapter().getItemCount() == 0) {
+            noFavoritePlaces.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
