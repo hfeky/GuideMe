@@ -30,7 +30,10 @@
         <activity
             android:name=".ui.authentication.LogInActivity"
             android:screenOrientation="portrait">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
         <activity
@@ -46,33 +49,30 @@
             android:name=".ui.home.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
             android:name=".ui.trips_listing.TripsActivity"
-            android:label="Explore Trips"
+            android:label="Trips"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.trip_creation.TripCreationActivity"
-            android:screenOrientation="portrait" />
+            android:label="Trip Overview"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.AppBarOverlay" />
 
         <activity
             android:name=".ui.dashboard.RequestTourGuideActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.dashboard.AvailableTourGuidesActivity"
-            android:label="Available Tour Guides"
+            android:name=".ui.dashboard.GuidesYouMightLikeActivity"
+            android:label="Tour Guides you might like"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.dashboard.TourGuideProfileActivity"
+            android:name=".ui.dashboard.GuideProfileActivity"
             android:screenOrientation="portrait" />
 
         <activity
@@ -98,13 +98,6 @@
             android:name=".ui.home.NotificationsActivity"
             android:label="Notifications"
             android:screenOrientation="portrait" />
-
-
-        <activity android:name=".ui.BookTour.ChooseFilters"
-            android:label="Trip Preferences"
-            >
-
-        </activity>
 
     </application>
 

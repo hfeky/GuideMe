@@ -43,28 +43,28 @@
     </string-array>
 
     <string-array name="categories_for_filters">
-        <item>Snorkelling</item>
-        <item>Nature</item>
-        <item>Landmark</item>
-        <item>Swimming</item>
-        <item>Sandboarding</item>
-        <item>Sandvolley</item>
-        <item>Stargazing</item>
-        <item>Recreation</item>
-        <item>Tennis</item>
-        <item>Squash</item>
-        <item>Bowling</item>
-        <item>Diving</item>
-        <item>Yacht</item>
-        <item>Ferry</item>
-        <item>Safari</item>
-        <item>Kitesurfing</item>
-        <item>Windsurfing</item>
-        <item>Golf</item>
-        <item>Bicycling</item>
-        <item>Sunset</item>
-        <item>Cruise</item>
-        <item>Air Balloons</item>
+        <item>snorkelling</item>
+        <item>nature</item>
+        <item>landmark</item>
+        <item>swimming</item>
+        <item>sandboarding</item>
+        <item>sandvolley</item>
+        <item>stargazing</item>
+        <item>recreation</item>
+        <item>tennis</item>
+        <item>squash</item>
+        <item>bowling</item>
+        <item>diving</item>
+        <item>yacht</item>
+        <item>ferry</item>
+        <item>safari</item>
+        <item>kitesurfing</item>
+        <item>windsurfing</item>
+        <item>golf</item>
+        <item>bicycling</item>
+        <item>sunset</item>
+        <item>cruise</item>
+        <item>air Balloons</item>
 
     </string-array>
 
