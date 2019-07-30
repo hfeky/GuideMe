@@ -38,7 +38,7 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
-        arr.add("Trip Overview");
+        arr.add("Places Overview");
         arr.add("Add restaurants?");
         arr.add("Stay at an hotel?");
         arr.add("Book a Tour Guide?");
