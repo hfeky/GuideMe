@@ -48,7 +48,7 @@ public class TourGuideProfileActivity extends AppCompatActivity {
 
         Glide.with(this)
                 .load(guide.getPhoto())
-                .placeholder(R.drawable.ic_tour_guide)
+                .placeholder(R.drawable.placeholder_person)
                 .apply(RequestOptions.circleCropTransform())
                 .into(guideAvatar);
 
