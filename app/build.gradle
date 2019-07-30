@@ -62,19 +62,16 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    //uber
+    // Uber
     implementation "com.uber.sdk:rides-android:0.5.3"
 
-    //PING Place Picker
-    // PING Place Picker
-//    implementation 'com.github.rtchagas:pingplacepicker:1.1.+'
-
-    //FLUTTER HELL YEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+    // FLUTTER HELL YEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 //    implementation project(':flutter')
 
 }
 
 apply plugin: 'com.google.gms.google-services'
+
 /**
  * Loads property from gradle.properties and ~/.gradle/gradle.properties
  * Use to look up confidential information like keys that shoudln't be stored publicly

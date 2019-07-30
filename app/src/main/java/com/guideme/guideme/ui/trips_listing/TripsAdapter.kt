@@ -48,6 +48,7 @@ class TripsAdapter(
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, TripCreationActivity::class.java)
+            intent.putExtra("trip", trip)
             context.startActivity(intent)
         }
     }
