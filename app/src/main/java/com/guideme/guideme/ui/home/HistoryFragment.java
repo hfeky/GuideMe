@@ -10,8 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.guideme.guideme.R;
+import com.guideme.guideme.data.models.Trip;
 import com.guideme.guideme.ui.common.AutoHideFAB;
 import com.guideme.guideme.ui.home.MainActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HistoryFragment extends Fragment {
 
@@ -25,6 +29,7 @@ public class HistoryFragment extends Fragment {
         AutoHideFAB fab = ((MainActivity) getContext()).getAddFab();
         fab.setupWithRecyclerView(recyclerView);
 
+        List<Trip> trips = new ArrayList<>();
         return view;
     }
 }

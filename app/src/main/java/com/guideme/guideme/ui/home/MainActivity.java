@@ -21,6 +21,8 @@ import com.guideme.guideme.R;
 import com.guideme.guideme.ui.trips_listing.TripsActivity;
 import com.guideme.guideme.ui.common.AutoHideFAB;
 import com.guideme.guideme.ui.common.ViewPagerAdapter;
+import com.instabug.library.Instabug;
+import com.instabug.library.invocation.InstabugInvocationEvent;
 
 public class MainActivity extends AppCompatActivity {
 

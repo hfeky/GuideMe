@@ -10,9 +10,13 @@ import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 import com.guideme.guideme.R;
 import com.guideme.guideme.ui.common.AutoHideFAB;
 import com.guideme.guideme.ui.trips_listing.TripsActivity;
+
+import java.util.ArrayList;
 
 public class ExploreFragment extends Fragment {
 
@@ -93,6 +97,28 @@ public class ExploreFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        ArrayList<Chip> chips = new ArrayList<>();
+        for(int i = 0 ;i<12;i++){
+            Chip chip = (Chip) LayoutInflater.from(getContext()).inflate(R.layout.item_trip_tag, null, false);
+            chip.setClickable(true);
+            chips.add(chip);
+        }
+        chips.get(0).setText("Sea");
+        chips.get(1).setText("Golf");
+        chips.get(2).setText("Wind Surfing");
+        chips.get(3).setText("History");
+        chips.get(4).setText("Culture");
+        chips.get(5).setText("Desert");
+        chips.get(6).setText("Snorkling");
+        chips.get(7).setText("Yacht");
+        chips.get(8).setText("Recreation");
+        chips.get(9).setText("Diving");
+        chips.get(10).setText("Shopping");
+        chips.get(11).setText("Landmark");
+        ChipGroup chipGroup = view.findViewById(R.id.chip_group);
+        for(int i = 0 ;i<chips.size();i++){
+            chipGroup.addView(chips.get(i));
+        }
 
 
         return view;

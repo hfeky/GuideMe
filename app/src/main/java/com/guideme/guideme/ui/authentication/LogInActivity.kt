@@ -27,6 +27,7 @@ class LogInActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         auth = FirebaseAuth.getInstance()
+
         val currentUser = auth.currentUser
         if (currentUser != null) {
             startActivity(Intent(this, MainActivity::class.java))
@@ -99,7 +100,8 @@ class LogInActivity : AppCompatActivity() {
         signUp.movementMethod = LinkMovementMethod.getInstance()
         signUp.highlightColor = Color.TRANSPARENT
 
-        val spannableString2 = SpannableString("By logging in, I accept Guide Me\nTerms and Conditions.")
+        val spannableString2 =
+            SpannableString("By logging in, I accept Guide Me\nTerms and Conditions.")
         val clickableSpan2 = object : ClickableSpan() {
             override fun onClick(textView: View) {
                 startActivity(Intent(this@LogInActivity, TermsAndConditionsActivity::class.java))
