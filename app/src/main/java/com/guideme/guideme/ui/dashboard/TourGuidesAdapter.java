@@ -58,7 +58,7 @@ public class TourGuidesAdapter extends RecyclerView.Adapter<TourGuidesAdapter.Vi
 
         Glide.with(context)
                 .load(guide.getPhoto())
-                .placeholder(R.drawable.ic_tour_guide)
+                .placeholder(R.drawable.placeholder_person)
                 .apply(RequestOptions.circleCropTransform())
                 .into(holder.guideAvatar);
 

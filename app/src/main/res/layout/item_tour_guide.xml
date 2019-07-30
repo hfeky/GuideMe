@@ -20,7 +20,7 @@
             android:layout_height="65dp"
             android:layout_marginRight="8dp"
             android:padding="8dp"
-            app:srcCompat="@drawable/ic_tour_guide" />
+            android:src="@drawable/placeholder_person" />
 
         <LinearLayout
             android:layout_width="0dp"

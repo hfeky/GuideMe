@@ -43,7 +43,7 @@
                     android:id="@+id/avatar"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:src="@drawable/ic_tour_guide" />
+                    android:src="@drawable/placeholder_person" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -57,6 +57,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Perks"
+                        android:textColor="#000000"
                         android:textSize="16sp" />
 
                     <TextView
@@ -65,6 +66,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="5"
+                        android:textColor="#000000"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -82,6 +84,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="Completed Trips"
+                        android:textColor="#000000"
                         android:textSize="16sp" />
 
                     <TextView
@@ -89,6 +92,7 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="152"
+                        android:textColor="#000000"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -101,7 +105,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="Guide's Name"
+                android:text="Name"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -110,15 +115,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Guide's Name"
-                android:textSize="20sp" />
+                android:textColor="#000000"
+                android:textSize="20sp"
+                tools:text="Guide's Name" />
 
             <TextView
                 android:id="@+id/guidePhoneLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="Guide's Phone"
+                android:text="Phone Number"
+                android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
@@ -127,8 +134,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="555-100-5214"
-                android:textSize="20sp" />
+                android:textColor="#000000"
+                android:textSize="20sp"
+                tools:text="555-100-5214" />
 
             <TextView
                 android:id="@+id/guideRating"
@@ -136,9 +144,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="The guide's rating"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Tour guide's rating" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -147,13 +156,12 @@
                 android:clipToPadding="false"
                 android:padding="4dp" />
 
-
             <Button
                 android:id="@+id/button"
                 style="@style/Button.Normal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="30dp"
                 android:text="Book Now"
                 android:textSize="20sp" />
 
