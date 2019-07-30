@@ -48,35 +48,35 @@
         <activity
             android:name=".ui.home.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.trips_listing.TripsActivity"
-            android:label="Trips"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.trips_listing.TripsListing"
-            android:label="Trips"
+            android:label="Explore Trips"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.trip_creation.TripCreationActivity"
-            android:label="Trip Overview"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.AppBarOverlay" />
-
-        <activity
-            android:name=".ui.dashboard.RequestTourGuideActivity"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.dashboard.GuidesYouMightLikeActivity"
-            android:label="Tour Guides you might like"
+            android:name=".ui.tour_guide.AvailableTourGuidesActivity"
+            android:label="Available Tour Guides"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.dashboard.GuideProfileActivity"
+            android:name=".ui.tour_guide.TourGuideProfileActivity"
+            android:label="Tour Guide Profile"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.tour_guide.ChooseFilters"
+            android:label="Filter"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".ui.trip_creation.TripOverviewActivity"
+            android:label="Trips"
             android:screenOrientation="portrait" />
 
         <activity

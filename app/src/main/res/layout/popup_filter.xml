@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="8dp"
                 android:paddingLeft="8dp"
-                android:text="Category"
+                android:text="Tag"
                 android:textColor="#000000"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -92,6 +92,7 @@
             <Spinner
                 android:id="@+id/categorySpinner"
                 android:layout_width="wrap_content"
+                android:entries="@array/tags"
                 android:layout_height="wrap_content"
                 android:spinnerMode="dialog" />
 

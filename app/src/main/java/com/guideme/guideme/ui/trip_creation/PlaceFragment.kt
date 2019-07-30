@@ -13,7 +13,6 @@ import com.guideme.guideme.R
 import com.guideme.guideme.data.models.TripPlace
 import com.guideme.guideme.ui.common.DateUtils
 import kotlinx.android.synthetic.main.layout_place.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class PlaceFragment : Fragment() {
@@ -55,12 +54,12 @@ class PlaceFragment : Fragment() {
             Palette.from(bitmap).generate { palette ->
                 val lightVibrant = palette!!.getLightVibrantColor(Color.WHITE)
                 fadingEdgeLight.setBackgroundColor(
-                        Color.argb(
-                                51,
-                                Color.red(lightVibrant),
-                                Color.green(lightVibrant),
-                                Color.blue(lightVibrant)
-                        )
+                    Color.argb(
+                        51,
+                        Color.red(lightVibrant),
+                        Color.green(lightVibrant),
+                        Color.blue(lightVibrant)
+                    )
                 )
             }
         }

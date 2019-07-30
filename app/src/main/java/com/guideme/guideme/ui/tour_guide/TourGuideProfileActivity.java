@@ -1,4 +1,4 @@
-package com.guideme.guideme.ui.dashboard;
+package com.guideme.guideme.ui.tour_guide;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +21,7 @@ import java.util.List;
 public class TourGuideProfileActivity extends AppCompatActivity {
 
     private TextView guideName;
+    private TextView guidePhone;
     private TextView guideRating;
     private ImageView guideAvatar;
     private TextView guidePerksCount;
@@ -40,10 +41,13 @@ public class TourGuideProfileActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(guide.getName() + "'s Profile");
 
         guideName = findViewById(R.id.guideName);
+        guidePhone = findViewById(R.id.guidePhone);
         guideRating = findViewById(R.id.guideRating);
         guideAvatar = findViewById(R.id.avatar);
         guidePerksCount = findViewById(R.id.guidePerksCount);
+
         guideName.setText(guide.getName());
+        guidePhone.setText(guide.getPhoneNumber());
         guideRating.setText(guide.getName() + " has a rating of " + guide.getRating() + " stars");
 
         Glide.with(this)

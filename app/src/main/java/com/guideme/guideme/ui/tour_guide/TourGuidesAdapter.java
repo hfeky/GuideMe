@@ -1,4 +1,4 @@
-package com.guideme.guideme.ui.dashboard;
+package com.guideme.guideme.ui.tour_guide;
 
 import android.content.Intent;
 import android.view.LayoutInflater;

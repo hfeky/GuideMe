@@ -1,4 +1,4 @@
-package com.guideme.guideme.ui.dashboard;
+package com.guideme.guideme.ui.tour_guide;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -46,11 +46,12 @@ public class AvailableTourGuidesActivity extends AppCompatActivity {
             public void onSuccess(QuerySnapshot result) {
                 for (QueryDocumentSnapshot document : result) {
                     String name = (String) document.get("name");
+                    String phoneNumber = (String) document.get("phone_number");
                     String photo = (String) document.get("photo");
                     double rating = (Double) document.get("rating");
                     String origin = (String) document.get("origin");
                     List<String> perks = (List<String>) document.get("perks");
-                    guides.add(new TourGuide(name, photo, rating, origin, perks));
+                    guides.add(new TourGuide(name, phoneNumber, photo, rating, origin, perks));
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
             }

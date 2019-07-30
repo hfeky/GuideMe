@@ -1,15 +1,8 @@
-package com.guideme.guideme.ui.BookTour;
+package com.guideme.guideme.ui.tour_guide;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,10 +10,12 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.guideme.guideme.R;
-import com.guideme.guideme.ui.dashboard.GuidesYouMightLikeActivity;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import java.lang.reflect.Array;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.guideme.guideme.R;
+
 import java.util.ArrayList;
 
 public class ChooseFilters extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -45,7 +40,7 @@ public class ChooseFilters extends AppCompatActivity implements AdapterView.OnIt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choose_filters);
+        setContentView(R.layout.layout_choose_filters);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -58,7 +53,7 @@ public class ChooseFilters extends AppCompatActivity implements AdapterView.OnIt
                 b.putStringArrayList("city", selectedC);
                 ActivityOptions options =
                         ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.slide_on, R.anim.slide_off);
-                startActivity(new Intent(ChooseFilters.this, GuidesYouMightLikeActivity.class).putExtras(b), options.toBundle());
+                startActivity(new Intent(ChooseFilters.this, AvailableTourGuidesActivity.class).putExtras(b), options.toBundle());
             }
         });
         mCitiesResult = findViewById(R.id.cities_result);
@@ -67,18 +62,15 @@ public class ChooseFilters extends AppCompatActivity implements AdapterView.OnIt
         mCitiesSpinner = findViewById(R.id.spinner_cities);
         mTagsSpinner = findViewById(R.id.spinner_tags);
 
-        ArrayAdapter adapterCities = ArrayAdapter.createFromResource(this, R.array.cities_for_filters, android.R.layout.simple_spinner_item);
+        ArrayAdapter adapterCities = ArrayAdapter.createFromResource(this, R.array.cities, android.R.layout.simple_spinner_item);
         adapterCities.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mCitiesSpinner.setAdapter(adapterCities);
         mCitiesSpinner.setOnItemSelectedListener(this);
 
-
-        ArrayAdapter adapterTags = ArrayAdapter.createFromResource(this, R.array.categories_for_filters, android.R.layout.simple_spinner_item);
+        ArrayAdapter adapterTags = ArrayAdapter.createFromResource(this, R.array.tags, android.R.layout.simple_spinner_item);
         adapterTags.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mTagsSpinner.setAdapter(adapterTags);
         mTagsSpinner.setOnItemSelectedListener(this);
-
-
     }
 
     @Override
@@ -117,7 +109,6 @@ public class ChooseFilters extends AppCompatActivity implements AdapterView.OnIt
 
         mCitiesResult.setText(dispC);
         mTagsResult.setText(dispT);
-
     }
 
     @Override
@@ -125,9 +116,6 @@ public class ChooseFilters extends AppCompatActivity implements AdapterView.OnIt
         Toast.makeText(this, "Please select your preferences!", Toast.LENGTH_SHORT).show();
     }
 
-
     //TODO: pass arrays to filters
     //TODO: could use better design
-
-
 }
