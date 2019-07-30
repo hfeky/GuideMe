@@ -1,7 +1,6 @@
 package com.guideme.guideme.ui.dashboard;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,9 @@ import com.guideme.guideme.data.models.TourGuide;
 
 import java.util.List;
 
-public class GuidesAdapter extends RecyclerView.Adapter<GuidesAdapter.ViewHolder> {
+public class TourGuidesAdapter extends RecyclerView.Adapter<TourGuidesAdapter.ViewHolder> {
 
-    private GuidesYouMightLikeActivity context;
+    private AvailableTourGuidesActivity context;
     private List<TourGuide> guides;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -38,14 +37,14 @@ public class GuidesAdapter extends RecyclerView.Adapter<GuidesAdapter.ViewHolder
         }
     }
 
-    public GuidesAdapter(GuidesYouMightLikeActivity context, List<TourGuide> guides) {
+    public TourGuidesAdapter(AvailableTourGuidesActivity context, List<TourGuide> guides) {
         this.context = context;
         this.guides = guides;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tourguide, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_tour_guide, parent, false);
         return new ViewHolder(view);
     }
 
@@ -55,7 +54,7 @@ public class GuidesAdapter extends RecyclerView.Adapter<GuidesAdapter.ViewHolder
 
         holder.guideName.setText(guide.getName());
         holder.guideRating.setText(String.valueOf(guide.getRating()));
-        holder.guideOrigin.setText("City of origin: "+guide.getOrigin());
+        holder.guideOrigin.setText("City: " + guide.getOrigin());
 
         Glide.with(context)
                 .load(guide.getPhoto())
@@ -66,7 +65,7 @@ public class GuidesAdapter extends RecyclerView.Adapter<GuidesAdapter.ViewHolder
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, GuideProfileActivity.class);
+                Intent intent = new Intent(context, TourGuideProfileActivity.class);
                 intent.putExtra("guide", guide);
                 context.startActivity(intent);
             }

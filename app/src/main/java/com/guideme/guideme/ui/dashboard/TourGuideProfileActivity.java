@@ -1,26 +1,24 @@
 package com.guideme.guideme.ui.dashboard;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.models.TourGuide;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class GuideProfileActivity extends AppCompatActivity {
+public class TourGuideProfileActivity extends AppCompatActivity {
 
     private TextView guideName;
     private TextView guideRating;
@@ -30,7 +28,7 @@ public class GuideProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guide_profile);
+        setContentView(R.layout.layout_tour_guide_profile);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -55,7 +53,7 @@ public class GuideProfileActivity extends AppCompatActivity {
                 .into(guideAvatar);
 
         List<String> perks = guide.getPerks();
-        guidePerksCount.setText(perks.size()+"");
+        guidePerksCount.setText(String.valueOf(perks.size()));
 
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(new PerksAdapter(this, perks));
@@ -75,6 +73,4 @@ public class GuideProfileActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.contact_menu, menu);
         return true;
     }
-
-
 }

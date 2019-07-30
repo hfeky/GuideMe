@@ -1,19 +1,14 @@
 package com.guideme.guideme.ui.dashboard;
 
-import androidx.annotation.NonNull;
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
-
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.guideme.guideme.R;
@@ -23,14 +18,14 @@ import com.guideme.guideme.data.models.TourGuide;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GuidesYouMightLikeActivity extends AppCompatActivity {
+public class AvailableTourGuidesActivity extends AppCompatActivity {
 
     private DataManager dataManager = new DataManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_guides_you_might_like);
+        setContentView(R.layout.layout_available_tour_guides);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         final RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -44,7 +39,7 @@ public class GuidesYouMightLikeActivity extends AppCompatActivity {
         trips.add("Salah El Din Citadel");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new GuidesAdapter(this, guides));
+        recyclerView.setAdapter(new TourGuidesAdapter(this, guides));
 
         dataManager.getTourGuides(new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -55,7 +50,7 @@ public class GuidesYouMightLikeActivity extends AppCompatActivity {
                     double rating = (Double) document.get("rating");
                     String origin = (String) document.get("origin");
                     List<String> perks = (List<String>) document.get("perks");
-                    guides.add(new TourGuide(name, photo, rating, origin,perks));
+                    guides.add(new TourGuide(name, photo, rating, origin, perks));
                 }
                 recyclerView.getAdapter().notifyDataSetChanged();
             }
