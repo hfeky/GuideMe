@@ -9,7 +9,8 @@ data class TourGuide(
     val photo: String,
     val rating: Double,
     val origin: String,
-    val perks: List<String>
+    val perks: List<String>,
+    val activities: List<String>
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
@@ -18,6 +19,7 @@ data class TourGuide(
         parcel.readString()!!,
         parcel.readDouble(),
         parcel.readString()!!,
+        parcel.createStringArrayList()!!,
         parcel.createStringArrayList()!!)
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -27,6 +29,7 @@ data class TourGuide(
         parcel.writeDouble(rating)
         parcel.writeString(origin)
         parcel.writeStringList(perks)
+        parcel.writeStringList(activities)
     }
 
     override fun describeContents(): Int {
