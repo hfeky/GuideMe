@@ -64,7 +64,7 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
     @Override
     public @NonNull
     CharSequence getTitle(int index) {
-        return index == 0 ? arr.get(0) : (index == 1 ? arr.get(1) : arr.get(2)) ;
+        return index == 0 ? arr.get(0) : (index == 1 ? arr.get(1) : arr.get(2));
     }
 
     @Override
@@ -103,8 +103,8 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
         View inflateView = LayoutInflater.from(context).inflate(R.layout.vertical_stepper_sample_item, parent, false);
         TextView contentView = inflateView.findViewById(R.id.item_content);
         String placesDetail = "";
-        for(TripPlace place : places){
-            placesDetail += place.getName()+ "\n";
+        for (TripPlace place : places) {
+            placesDetail += place.getName() + "\n";
         }
         contentView.setText(
                 index == 0 ? placesDetail : (index == 1 ? "Would you like to visit any other restaurant?" : (index == 2 ? "Would you like to add a Hotel ?" : "Book a Tour Guide Tour guide can mak your trip easier!"))
@@ -115,24 +115,25 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
             @Override
             public void onClick(View view) {
                 mVerticalStepperView.nextStep();
-                if(index == 1){
+                if (index == 1) {
                     startActivity(new Intent(getContext(), RestaurantActivity.class));
                 }
-                if(index == 3){
+                if (index == 3) {
                     startActivity(new Intent(getContext(), ChooseFilters.class));
                 }
             }
         });
         Button prevButton = inflateView.findViewById(R.id.button_prev);
-        prevButton.setText(index == 0? "Back" : "No");
+        prevButton.setText(index == 0 ? "Back" : "No");
         inflateView.findViewById(R.id.button_prev).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(index == 0){
+                if (index == 0) {
                     getActivity().finish();
-                }
-                else
                     mVerticalStepperView.prevStep();
+                } else
+                    mVerticalStepperView.nextStep();
+
             }
         });
         return inflateView;

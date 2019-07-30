@@ -33,8 +33,8 @@ public class RestaurantActivity extends AppCompatActivity {
         List<Restaurant> restaurants = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new RestaurantsAdapter(this, restaurants));
-
-        dataManager.getRestaurants("city_id", new OnSuccessListener<QuerySnapshot>() {
+        String cityId = getIntent().getStringExtra("city_id");
+        dataManager.getRestaurants(cityId, new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot result) {
                 for (DocumentSnapshot document : result) {
@@ -46,6 +46,7 @@ public class RestaurantActivity extends AppCompatActivity {
                 }
             }
         });
+        System.out.println(restaurants+"AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     }
 
     @Override
