@@ -104,6 +104,7 @@ public class RequestTourGuideActivity extends FragmentActivity implements OnMapR
                 geoFire.setLocation(userId, new GeoLocation(lastLocation.getLatitude(), lastLocation.getLongitude()));
 
                 pickupLoc = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+                mMap.clear();
                 mMap.addMarker(new MarkerOptions().position(pickupLoc).title("Drivers arrive here!"));
                 mRequest.setText("Searching for a driver");
 

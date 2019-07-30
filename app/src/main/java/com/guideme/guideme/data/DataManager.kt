@@ -45,6 +45,32 @@ class DataManager {
             }
     }
 
+    fun addFavoritePlace(
+        userId: String,
+        placeId: String,
+        successListener: OnSuccessListener<Void>
+    ) {
+        getUser(userId, OnSuccessListener { result ->
+            val favoritePlaces = result["favorite_places"] as ArrayList<String>
+            favoritePlaces.add(placeId)
+
+            val userMap = mapOf(
+                "name" to result["name"] as String,
+                "phone_number" to result["phone_number"] as String,
+                "photo" to result["photo"] as String,
+                "favorite_places" to favoritePlaces
+            )
+
+            db.collection("users")
+                .document(userId)
+                .update(userMap)
+                .addOnSuccessListener(successListener)
+                .addOnFailureListener { exception ->
+                    Log.d(TAG, "Error getting documents: ", exception)
+                }
+        })
+    }
+
     fun getCities(successListener: OnSuccessListener<QuerySnapshot>) {
         db.collection("cities")
             .get(source)
@@ -75,7 +101,11 @@ class DataManager {
             }
     }
 
-    fun getTripPlaces(cityId: String, tripId: String, successListener: OnSuccessListener<QuerySnapshot>) {
+    fun getTripPlaces(
+        cityId: String,
+        tripId: String,
+        successListener: OnSuccessListener<QuerySnapshot>
+    ) {
         db.collection("cities")
             .document(cityId)
             .collection("trips")
