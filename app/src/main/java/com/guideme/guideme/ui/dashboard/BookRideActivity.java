@@ -2,11 +2,20 @@ package com.guideme.guideme.ui.dashboard;
 
 import android.Manifest;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Path;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +25,16 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import com.akexorcist.googledirection.DirectionCallback;
+import com.akexorcist.googledirection.GoogleDirection;
+import com.akexorcist.googledirection.config.GoogleDirectionConfiguration;
+import com.akexorcist.googledirection.constant.AvoidType;
+import com.akexorcist.googledirection.constant.TransportMode;
+import com.akexorcist.googledirection.model.Direction;
+import com.akexorcist.googledirection.model.Leg;
+import com.akexorcist.googledirection.model.Route;
+import com.akexorcist.googledirection.model.Step;
+import com.akexorcist.googledirection.util.DirectionConverter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
@@ -27,18 +46,28 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.listener.PlaceSelectionListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.guideme.guideme.BuildConfig;
 import com.guideme.guideme.R;
+import com.guideme.guideme.data.ParseJSON;
+import com.uber.sdk.android.rides.RideRequestButton;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
-public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCameraChangeListener, PlaceSelectionListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+public class BookRideActivity extends FragmentActivity implements DirectionCallback, GoogleMap.OnCameraChangeListener, PlaceSelectionListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
 
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
@@ -46,6 +75,10 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
     private RequestPermissionAction onPermissionCallBack;
     private final static int REQUEST_BULK_PERMISSION = 3006;
     private String mPlaceName;
+    private String longitude = "30";
+    private String latitude = "30";
+    private Location lastLocation;
+    private LatLng to;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +87,109 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         String[] permissions = {Manifest.permission.ACCESS_FINE_LOCATION};
 
+        RideRequestButton requestButton = findViewById(R.id.rideRequestButton);
+
+        requestButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawLocation(lastLocation.getLongitude()+"", lastLocation.getLatitude()+"", longitude, latitude);
+                String address = "", Address2 = "", city = "", State = "", Country = "", County = "", PIN = "";
+                try {
+                    JSONObject jsonObj = ParseJSON.getJSONfromURL("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&sensor=true&key=AIzaSyBdCXqTL1firHWYqahfPkXCIoeMPlX6-II");
+                    String Status = jsonObj.getString("status");
+                    if (Status.equalsIgnoreCase("OK")) {
+                        JSONArray Results = jsonObj.getJSONArray("results");
+                        JSONObject zero = Results.getJSONObject(0);
+                        JSONArray address_components = zero.getJSONArray("address_components");
+
+                        for (int i = 0; i < address_components.length(); i++) {
+                            JSONObject zero2 = address_components.getJSONObject(i);
+                            String long_name = zero2.getString("long_name");
+                            JSONArray mtypes = zero2.getJSONArray("types");
+                            String Type = mtypes.getString(0);
+
+                            if (TextUtils.isEmpty(long_name) == false || !long_name.equals(null) || long_name.length() > 0 || long_name != "") {
+                                if (Type.equalsIgnoreCase("street_number")) {
+                                    address = long_name + " ";
+                                } else if (Type.equalsIgnoreCase("route")) {
+                                    address = address + long_name;
+                                } else if (Type.equalsIgnoreCase("sublocality")) {
+                                    Address2 = long_name;
+                                } else if (Type.equalsIgnoreCase("locality")) {
+                                    // Address2 = Address2 + long_name + ", ";
+                                    city = long_name;
+                                } else if (Type.equalsIgnoreCase("administrative_area_level_2")) {
+                                    County = long_name;
+                                } else if (Type.equalsIgnoreCase("administrative_area_level_1")) {
+                                    State = long_name;
+                                } else if (Type.equalsIgnoreCase("country")) {
+                                    Country = long_name;
+                                } else if (Type.equalsIgnoreCase("postal_code")) {
+                                    PIN = long_name;
+                                }
+                            }
+
+                            // JSONArray mtypes = zero2.getJSONArray("types");
+                            // String Type = mtypes.getString(0);
+                            // Log.e(Type,long_name);
+                        }
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                String drop_address = "";
+                String drop_city = "";
+                try {
+                    JSONObject jsonObj = ParseJSON.getJSONfromURL("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude + "," + longitude + "&sensor=true&key=AIzaSyBdCXqTL1firHWYqahfPkXCIoeMPlX6-II");
+                    String Status = jsonObj.getString("status");
+                    if (Status.equalsIgnoreCase("OK")) {
+                        JSONArray Results = jsonObj.getJSONArray("results");
+                        JSONObject zero = Results.getJSONObject(0);
+                        JSONArray address_components = zero.getJSONArray("address_components");
+
+                        for (int i = 0; i < address_components.length(); i++) {
+                            JSONObject zero2 = address_components.getJSONObject(i);
+                            String long_name = zero2.getString("long_name");
+                            JSONArray mtypes = zero2.getJSONArray("types");
+                            String Type = mtypes.getString(0);
+
+                            if (TextUtils.isEmpty(long_name) == false || !long_name.equals(null) || long_name.length() > 0 || long_name != "") {
+                                if (Type.equalsIgnoreCase("street_number")) {
+                                    drop_address = long_name + " ";
+                                } else if (Type.equalsIgnoreCase("route")) {
+                                    drop_address = drop_address + long_name;
+                                } else if (Type.equalsIgnoreCase("locality")) {
+                                    // Address2 = Address2 + long_name + ", ";
+                                    drop_city = long_name;
+                                }
+                            }
+
+                            // JSONArray mtypes = zero2.getJSONArray("types");
+                            // String Type = mtypes.getString(0);
+                            // Log.e(Type,long_name);
+                        }
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                address = address.replaceAll(" ", "%20");
+                city = city.replaceAll(" ", "%20");
+                drop_address = drop_address.replaceAll(" ", "%20");
+                drop_city = drop_city.replaceAll(" ", "%20");
+
+                Toast.makeText(BookRideActivity.this, address + " HHBM", Toast.LENGTH_LONG).show();
+//                String uri = "https://m.uber.com/ul/?client_id=evlvdjIz8Guu4Hka2dFfcoiNdm98kwry&action=setPickup&pickup[latitude]=" + lastLocation.getLatitude() + "&pickup[longitude]=-" + lastLocation.getLongitude() + "&pickup[nickname]=" + address + "&dropoff[latitude]=" + latitude + "&dropoff[longitude]=" + longitude + "&dropoff[nickname]=" + drop_address + "&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d\n";
+                String uri = "https://m.uber.com/ul/?client_id=evlvdjIz8Guu4Hka2dFfcoiNdm98kwry&action=setPickup&pickup[latitude]=" + lastLocation.getLatitude() + "&pickup[longitude]=" + lastLocation.getLongitude() + "&pickup[nickname]=" + city + "&pickup[formatted_address]=" + address + "&dropoff[latitude]=" + latitude + "&dropoff[longitude]=" + longitude + "&dropoff[nickname]=" + drop_city + "&dropoff[formatted_address]=" + drop_address + "&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d\n";
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(uri));
+                startActivity(intent);
+
+            }
+        });
         getBulkPermissions(permissions, new RequestPermissionAction() {
             @Override
             public void permissionDenied() {
@@ -114,7 +250,10 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
 
                 // Setting the position for the marker
                 markerOptions.position(latLng);
-
+                longitude = latLng.longitude + "";
+                latitude = latLng.latitude + "";
+                to = latLng;
+                drawLocation(lastLocation.getLongitude()+"", lastLocation.getLongitude()+"", latitude, longitude);
                 // Setting the title for the marker.
                 // This will be displayed on taping the marker
                 markerOptions.title(latLng.latitude + " : " + latLng.longitude);
@@ -145,7 +284,7 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
 
     @Override
     public void onLocationChanged(Location location) {
-//        lastLocation = location;
+        lastLocation = location;
 //        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 //        // to set the center of the screen point to the location
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -245,6 +384,12 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
             return;
         }
         final LatLng latLng = place.getLatLng();
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        longitude = latLng.longitude + "";
+        latitude = latLng.latitude + "";
+        drawLocation(lastLocation.getLongitude()+"", lastLocation.getLongitude()+"", latitude, longitude);
+
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18));
         mMap.setOnCameraChangeListener(this);
     }
@@ -253,7 +398,7 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
     public void onError(@NonNull Status status) {
         Log.e(BuildConfig.BUILD_TYPE, "onError: Status = " + status.toString());
 
-        Toast.makeText(this, "TripPlace selection failed: " + status.getStatusMessage(),
+        Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -262,6 +407,34 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
         mMap.addMarker(new MarkerOptions().position(cameraPosition.target).title(mPlaceName));
 
         mMap.setOnCameraChangeListener(null);
+    }
+
+    @Override
+    public void onDirectionSuccess(Direction direction, String rawBody) {
+//        Snackbar.make(btnRequestDirection, "Success with status : " + direction.getStatus(), Snackbar.LENGTH_SHORT).show();
+        if (direction.isOK()) {
+            Route route = direction.getRouteList().get(0);
+            int legCount = route.getLegList().size();
+            for (int index = 0; index < legCount; index++) {
+                Leg leg = route.getLegList().get(index);
+                mMap.addMarker(new MarkerOptions().position(leg.getStartLocation().getCoordination()));
+                if (index == legCount - 1) {
+                    mMap.addMarker(new MarkerOptions().position(leg.getEndLocation().getCoordination()));
+                }
+                List<Step> stepList = leg.getStepList();
+                ArrayList<PolylineOptions> polylineOptionList = DirectionConverter.createTransitPolyline(this, stepList, 5, getResources().getColor(R.color.colorAccent), 3, Color.BLUE);
+                for (PolylineOptions polylineOption : polylineOptionList) {
+                    mMap.addPolyline(polylineOption);
+                }
+            }
+            setCameraWithCoordinationBounds(route);
+//            btnRequestDirection.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onDirectionFailure(Throwable t) {
+
     }
 
     public interface RequestPermissionAction {
@@ -289,4 +462,31 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
             }
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    private void drawLocation(String fromLong, String fromLat, String toLong, String toLat){
+        GoogleDirectionConfiguration.getInstance().setLogEnabled(true);
+        LatLng from = new LatLng(Double.parseDouble(fromLat), Double.parseDouble(fromLong));
+        LatLng to = new LatLng(Double.parseDouble(toLat), Double.parseDouble(toLong));
+        GoogleDirection.withServerKey("AIzaSyBdCXqTL1firHWYqahfPkXCIoeMPlX6-II")
+                .from(from)
+                .to(to)
+                .transportMode(TransportMode.DRIVING)
+                .execute(this);
+    }
+
+    private void setCameraWithCoordinationBounds(Route route) {
+        LatLng southwest = route.getBound().getSouthwestCoordination().getCoordination();
+        LatLng northeast = route.getBound().getNortheastCoordination().getCoordination();
+        LatLngBounds bounds = new LatLngBounds(southwest, northeast);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
+    }
+
 }
+
+
+

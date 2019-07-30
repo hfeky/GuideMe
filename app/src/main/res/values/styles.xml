@@ -6,6 +6,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
     <style name="AppTheme.AppBarOverlay" parent="AppTheme">
         <item name="colorPrimaryDark">#0D000000</item>
     </style>

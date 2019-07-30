@@ -1,72 +1,25 @@
 <resources>
 
     <string-array name="cities">
-        <item>Select City</item>
+        <item>All cities</item>
         <item>Alexandria</item>
         <item>Cairo</item>
-        <item>North Coast</item>
+        <item>El Sahel</item>
         <item>Giza</item>
         <item>Luxor</item>
         <item>Sharm El-Sheikh</item>
-
     </string-array>
 
-
-    <string-array name="categories">
-        <item>All categories</item>
-        <item>Camping</item>
-        <item>Culture</item>
-        <item>Hiking</item>
-        <item>History</item>
+    <string-array name="tags">
+        <item>all categories</item>
+        <item>camping</item>
+        <item>culture</item>
+        <item>hiking</item>
+        <item>history</item>
         <item>Sea</item>
-        <item>Shopping</item>
-
-
-
-    </string-array>
-
-
-    <string-array name="cities_for_filters">
-        <item>Alexandria</item>
-        <item>Cairo</item>
-        <item>North Coast</item>
-        <item>Giza</item>
-        <item>Luxor</item>
-        <item>Sharm El-Sheikh</item>
-        <item>Fayyoum</item>
-        <item>Hurghada</item>
-        <item>Siwa</item>
-        <item>Taba</item>
-        <item>Sharqia</item>
-        <item>Aswan</item>
-        <item>Marsa Matruh</item>
-    </string-array>
-
-    <string-array name="categories_for_filters">
-        <item>snorkelling</item>
-        <item>nature</item>
+        <item>shopping</item>
+        <item>wind surfing</item>
         <item>landmark</item>
-        <item>swimming</item>
-        <item>sandboarding</item>
-        <item>sandvolley</item>
-        <item>stargazing</item>
-        <item>recreation</item>
-        <item>tennis</item>
-        <item>squash</item>
-        <item>bowling</item>
-        <item>diving</item>
-        <item>yacht</item>
-        <item>ferry</item>
-        <item>safari</item>
-        <item>kitesurfing</item>
-        <item>windsurfing</item>
-        <item>golf</item>
-        <item>bicycling</item>
-        <item>sunset</item>
-        <item>cruise</item>
-        <item>air Balloons</item>
-
     </string-array>
-
 
 </resources>
