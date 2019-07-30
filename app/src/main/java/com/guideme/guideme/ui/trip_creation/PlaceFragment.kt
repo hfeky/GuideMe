@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
 import com.guideme.guideme.R
-import com.guideme.guideme.data.models.Place
+import com.guideme.guideme.data.models.TripPlace
 import com.guideme.guideme.ui.common.DateUtils
 import kotlinx.android.synthetic.main.layout_place.*
 import java.text.SimpleDateFormat
@@ -22,16 +22,12 @@ class PlaceFragment : Fragment() {
     var placeImage: Drawable? = null
         private set
 
-    var place: Place? = null
+    var place: TripPlace? = null
         private set
 
     private var location: String? = null
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.layout_place, container, false)
         context = getContext() as TripCreationActivity?
         return view
@@ -59,12 +55,12 @@ class PlaceFragment : Fragment() {
             Palette.from(bitmap).generate { palette ->
                 val lightVibrant = palette!!.getLightVibrantColor(Color.WHITE)
                 fadingEdgeLight.setBackgroundColor(
-                    Color.argb(
-                        51,
-                        Color.red(lightVibrant),
-                        Color.green(lightVibrant),
-                        Color.blue(lightVibrant)
-                    )
+                        Color.argb(
+                                51,
+                                Color.red(lightVibrant),
+                                Color.green(lightVibrant),
+                                Color.blue(lightVibrant)
+                        )
                 )
             }
         }
@@ -77,7 +73,11 @@ class PlaceFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         if (isVisible) {
-            context!!.setPlaceImage(placeImage)
+            if (placeImage != null) {
+                context!!.setPlaceImage(placeImage!!)
+            } else {
+                context!!.setPlaceImage(resources.getDrawable(R.drawable.image_placeholder))
+            }
         }
     }
 
