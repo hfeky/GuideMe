@@ -35,7 +35,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation "androidx.core:core-ktx:1.0.2"
+    implementation 'androidx.core:core-ktx:1.0.2'
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
@@ -70,8 +70,13 @@ dependencies {
     // Uber
     implementation "com.uber.sdk:rides-android:0.5.3"
 
+    implementation 'com.akexorcist:googledirectionlibrary:1.1.1'
+
     // FLUTTER HELL YEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 //    implementation project(':flutter')
+
+    implementation 'moe.feng:MaterialStepperView:0.2.4.2'
+
 
 }
 
