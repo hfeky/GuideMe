@@ -83,8 +83,8 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ui.tour_guide.ChooseFilters"
-            android:label="Trip Preferences"
+            android:name=".ui.tour_guide.TourGuidesFilterActivity"
+            android:label="Filter Tour Guides"
             android:screenOrientation="portrait" />
 
         <activity

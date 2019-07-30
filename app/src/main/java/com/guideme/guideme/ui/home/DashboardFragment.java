@@ -17,8 +17,7 @@ import com.guideme.guideme.ui.dashboard.BookRideActivity;
 import com.guideme.guideme.ui.dashboard.CommonPhrasesActivity;
 import com.guideme.guideme.ui.dashboard.EmergencyNumbersActivity;
 import com.guideme.guideme.ui.dashboard.FavoritePlacesActivity;
-import com.guideme.guideme.ui.tour_guide.AvailableTourGuidesActivity;
-import com.guideme.guideme.ui.tour_guide.ChooseFilters;
+import com.guideme.guideme.ui.tour_guide.TourGuidesFilterActivity;
 
 public class DashboardFragment extends Fragment {
 
@@ -40,7 +39,7 @@ public class DashboardFragment extends Fragment {
         requestTourGuide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), ChooseFilters.class));
+                startActivity(new Intent(getContext(), TourGuidesFilterActivity.class));
             }
         });
 

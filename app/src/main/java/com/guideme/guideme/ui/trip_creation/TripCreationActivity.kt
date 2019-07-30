@@ -186,6 +186,7 @@ class TripCreationActivity : AppCompatActivity() {
 
             intent.putExtra("places", places)
             intent.putExtra("city_id", trip.cityId)
+            intent.putExtra("city_id", trip.cityId)
             startActivity(intent)
         }
     }

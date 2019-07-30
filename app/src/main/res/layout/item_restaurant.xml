@@ -60,7 +60,7 @@
                 android:drawablePadding="4dp"
                 android:textColor="#000000"
                 android:textSize="18sp"
-                tools:text="4.8" />
+                android:text="4.8" />
 
         </LinearLayout>
 
