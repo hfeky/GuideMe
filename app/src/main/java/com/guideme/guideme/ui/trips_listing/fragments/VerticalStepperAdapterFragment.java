@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.models.TripPlace;
 import com.guideme.guideme.ui.tour_guide.ChooseFilters;
+import com.guideme.guideme.ui.trip_creation.RestaurantActivity;
+import com.guideme.guideme.ui.trip_creation.TripOverviewActivity;
 
 import java.util.ArrayList;
 
@@ -43,7 +45,6 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
         arr.add("Stay at an hotel?");
         arr.add("Book a Tour Guide?");
         return inflater.inflate(R.layout.fragment_vertical_stepper_adapter, parent, false);
-
     }
 
     @Override
@@ -63,22 +64,17 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
     CharSequence getSummary(int index) {
         switch (index) {
             case 0:
-                return Html.fromHtml("Places reviewed"
-                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : "")
-                );
-
+                return Html.fromHtml("Trips reviewed"
+                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
             case 1:
                 return Html.fromHtml("Restaurants updated"
                         + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
-
             case 2:
                 return Html.fromHtml("Hotels updated"
                         + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
-
             case 3:
                 return Html.fromHtml("Book a tour guide!"
                         + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
-
             default:
                 return null;
         }
@@ -95,7 +91,7 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
         TextView contentView = inflateView.findViewById(R.id.item_content);
         String placesDetail = "";
         for (TripPlace place : places) {
-            placesDetail += place.getName();
+            placesDetail += place.getName() + "\n";
         }
         contentView.setText(
                 index == 0 ? placesDetail : (index == 1 ? "Would you like to visit any other restaurant?" : (index == 2 ? "Would you like to add a Hotel ?" : "Book a Tour Guide Tour guide can mak your trip easier!"))
@@ -107,13 +103,17 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
             public void onClick(View view) {
 
                 mVerticalStepperView.nextStep();
-                if (index == 3) {
+                if (index == 1) {
+                    Intent intent = new Intent(getContext(), RestaurantActivity.class);
+                    intent.putExtra("city_id", ((TripOverviewActivity) context).getIntent().getExtras().getString("city_id"));
+                    startActivity(intent);
+                } else if (index == 3) {
                     startActivity(new Intent(getContext(), ChooseFilters.class));
                 }
             }
         });
         Button prevButton = inflateView.findViewById(R.id.button_prev);
-        prevButton.setText(index == 0 ? "Cancel" : "Back");
+        prevButton.setText(index == 0 ? "Cancel" : "No");
         inflateView.findViewById(R.id.button_prev).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,5 +132,4 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
     public void onHide(int index) {
 
     }
-
 }

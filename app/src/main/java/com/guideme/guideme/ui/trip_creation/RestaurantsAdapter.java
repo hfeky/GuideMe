@@ -10,9 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.guideme.guideme.R;
-import com.guideme.guideme.data.models.CommonPhrase;
 import com.guideme.guideme.data.models.Restaurant;
-import com.guideme.guideme.ui.dashboard.CommonPhrasesActivity;
 
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_common_phrase, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_restaurant, parent, false);
         return new ViewHolder(view);
     }
 

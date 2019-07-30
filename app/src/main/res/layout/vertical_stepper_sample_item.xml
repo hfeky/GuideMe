@@ -21,7 +21,7 @@
             android:id="@+id/button_next"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/material_blue_500"
+            android:backgroundTint="@color/colorAccent"
             android:textColor="@android:color/white"
             android:text="@android:string/ok"/>
 

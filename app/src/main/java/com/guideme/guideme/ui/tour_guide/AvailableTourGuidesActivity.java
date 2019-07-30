@@ -1,7 +1,6 @@
 package com.guideme.guideme.ui.tour_guide;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,12 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.DataManager;
-import com.guideme.guideme.data.models.Restaurant;
 import com.guideme.guideme.data.models.TourGuide;
 
 import java.util.ArrayList;
@@ -26,6 +23,7 @@ public class AvailableTourGuidesActivity extends AppCompatActivity {
     private DataManager dataManager = new DataManager();
     ArrayList<String> selectedT;
     ArrayList<String> selectedC;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,9 +57,9 @@ public class AvailableTourGuidesActivity extends AppCompatActivity {
                     String origin = (String) document.get("origin");
                     List<String> perks = (List<String>) document.get("perks");
                     List<String> activities = (List<String>) document.get("activities");
-                    if((selectedC.contains(origin)||selectedC.isEmpty()))
-                        for(String activity: activities) {
-                            if (selectedT.contains(activity)||selectedT.isEmpty()) {
+                    if ((selectedC.contains(origin) || selectedC.isEmpty()))
+                        for (String activity : activities) {
+                            if (selectedT.contains(activity) || selectedT.isEmpty()) {
                                 guides.add(new TourGuide(name, phoneNumber, photo, rating, origin, perks, activities));
                                 break;
                             }

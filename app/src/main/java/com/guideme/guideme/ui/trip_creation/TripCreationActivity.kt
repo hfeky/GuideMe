@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewAnimationUtils
@@ -150,7 +151,11 @@ class TripCreationActivity : AppCompatActivity() {
         pageIndicators.getChildAt(0).isSelected = true
 
         editFab.setOnClickListener {
-
+            for (fragment in adapter.fragments) {
+                if (fragment is PlaceFragment) {
+                    Log.e("LOOOL", DateUtils.formatDate(fragment.place!!.date))
+                }
+            }
         }
 
         setDateButton.setOnClickListener {
