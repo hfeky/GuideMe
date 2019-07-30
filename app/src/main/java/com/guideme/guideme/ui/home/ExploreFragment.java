@@ -29,13 +29,6 @@ public class ExploreFragment extends Fragment {
         CardView sahelCity = view.findViewById(R.id.sahelCity);
         CardView sharmCity = view.findViewById(R.id.sharmCity);
 
-        CardView seaCategory = view.findViewById(R.id.seaCategory);
-        CardView shoppingCategory = view.findViewById(R.id.shoppingCategory);
-        CardView cultureCategory = view.findViewById(R.id.cultureCategory);
-        CardView historyCategory = view.findViewById(R.id.historyCategory);
-        CardView campingCategory = view.findViewById(R.id.campingCategory);
-        CardView hikingCategory = view.findViewById(R.id.hikingCategory);
-
         NestedScrollView scrollView = view.findViewById(R.id.scrollView);
         AutoHideFAB fab = ((MainActivity) getContext()).getAddFab();
         fab.setupWithNestedScrollView(scrollView);
@@ -101,59 +94,6 @@ public class ExploreFragment extends Fragment {
             }
         });
 
-        seaCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TripsActivity.class);
-                intent.putExtra("category", 5);
-                startActivity(intent);
-            }
-        });
-
-        shoppingCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TripsActivity.class);
-                intent.putExtra("category", 6);
-                startActivity(intent);
-            }
-        });
-
-        cultureCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TripsActivity.class);
-                intent.putExtra("category", 2);
-                startActivity(intent);
-            }
-        });
-
-        historyCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TripsActivity.class);
-                intent.putExtra("category", 4);
-                startActivity(intent);
-            }
-        });
-
-        campingCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TripsActivity.class);
-                intent.putExtra("category", 1);
-                startActivity(intent);
-            }
-        });
-
-        hikingCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), TripsActivity.class);
-                intent.putExtra("category", 3);
-                startActivity(intent);
-            }
-        });
 
         return view;
     }
