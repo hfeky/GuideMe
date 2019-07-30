@@ -17,6 +17,7 @@ import com.guideme.guideme.ui.dashboard.FavoritePlacesActivity
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.layout_place.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class PlaceFragment : Fragment() {
 
@@ -71,21 +72,52 @@ class PlaceFragment : Fragment() {
             }
         }
 
+        Paper.init(context)
+        var favoritedPlaces = Paper.book().read("trips") as ArrayList<TripPlace>?
+        var isFavorited = false
+        if (favoritedPlaces != null) {
+            for (i in 0 until favoritedPlaces.size) {
+                if (place!!.placeId == favoritedPlaces[i].placeId) {
+                    isFavorited = true
+                    break
+                }
+            }
+        }
+        if (isFavorited) {
+            favoriteButton.setImageResource(R.drawable.ic_heart_filled)
+        } else {
+            favoriteButton.setImageResource(R.drawable.ic_heart_bordered)
+        }
+
         shareButton.setOnClickListener { }
 
         favoriteButton.setOnClickListener {
-          //  val intent = Intent(context, FavoritePlacesActivity::class.java)
-          //  intent.putExtra("place", place)
-            Paper.init(context)
-            var trips: ArrayList<TripPlace>? = Paper.book().read<ArrayList<TripPlace>>("trips")
-            if (trips == null) {
-                trips = ArrayList()
-            }
-            if (place != null)
-                trips.add(place!!)
-            Paper.book().write("trips", trips)
+            var favoritedPlaces = Paper.book().read("trips") as ArrayList<TripPlace>?
+            var isFavorited = false
 
-            //startActivity(intent)
+            if (favoritedPlaces != null) {
+                for (i in 0 until favoritedPlaces.size) {
+                    if (place!!.placeId == favoritedPlaces[i].placeId) {
+                        isFavorited = true
+                        favoritedPlaces.remove(favoritedPlaces[i])
+                        break
+                    }
+                }
+            }
+
+            if (!isFavorited) {
+                if (favoritedPlaces == null) {
+                    favoritedPlaces = ArrayList()
+                }
+                if (place != null) {
+                    favoritedPlaces.add(place!!)
+                }
+                favoriteButton.setImageResource(R.drawable.ic_heart_bordered)
+            } else {
+                favoriteButton.setImageResource(R.drawable.ic_heart_filled)
+            }
+
+            Paper.book().write("trips", favoritedPlaces)
         }
     }
 
