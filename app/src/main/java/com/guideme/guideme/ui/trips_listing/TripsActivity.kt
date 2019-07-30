@@ -11,11 +11,10 @@ import com.google.android.gms.tasks.OnSuccessListener
 import com.guideme.guideme.R
 import com.guideme.guideme.data.DataManager
 import com.guideme.guideme.data.models.City
-import com.guideme.guideme.data.models.Place
 import com.guideme.guideme.data.models.Trip
+import com.guideme.guideme.data.models.TripPlace
 import com.guideme.guideme.ui.trip_creation.TripCreationActivity
 import kotlinx.android.synthetic.main.layout_trips.*
-import kotlinx.android.synthetic.main.popup_filter.*
 import kotlinx.android.synthetic.main.popup_filter.view.*
 import java.util.*
 
@@ -45,7 +44,7 @@ class TripsActivity : AppCompatActivity() {
         }
 
         createFab.setupWithRecyclerView(recyclerView)
-        createFab.setOnClickListener(View.OnClickListener { v ->
+        createFab.setOnClickListener { v ->
             val intent = Intent(this@TripsActivity, TripCreationActivity::class.java)
             val revealX = (v.x + v.width / 2).toInt()
             val revealY = (v.y + v.height / 2).toInt()
@@ -53,7 +52,7 @@ class TripsActivity : AppCompatActivity() {
             intent.putExtra(TripCreationActivity.CIRCULAR_REVEAL_Y, revealY)
             startActivity(intent)
             overridePendingTransition(0, 0)
-        })
+        }
 
         loadCities()
     }
@@ -147,7 +146,7 @@ class TripsActivity : AppCompatActivity() {
             dataManager.getTripPlaces(city.cityId, trip.tripId, OnSuccessListener { result ->
                 for (document in result) {
                     trip.places.add(
-                        Place(
+                        TripPlace(
                             document.id,
                             document.get("name") as String,
                             document.get("description") as String?,

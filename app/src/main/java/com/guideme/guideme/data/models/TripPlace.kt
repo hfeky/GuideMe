@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import java.util.*
 
-data class Place(
+data class TripPlace(
     val placeId: String,
     val name: String,
     val description: String? = "No description available.",
@@ -31,12 +31,12 @@ data class Place(
         return 0
     }
 
-    companion object CREATOR : Parcelable.Creator<Place> {
-        override fun createFromParcel(parcel: Parcel): Place {
-            return Place(parcel)
+    companion object CREATOR : Parcelable.Creator<TripPlace> {
+        override fun createFromParcel(parcel: Parcel): TripPlace {
+            return TripPlace(parcel)
         }
 
-        override fun newArray(size: Int): Array<Place?> {
+        override fun newArray(size: Int): Array<TripPlace?> {
             return arrayOfNulls(size)
         }
     }

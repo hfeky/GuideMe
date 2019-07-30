@@ -253,7 +253,7 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
     public void onError(@NonNull Status status) {
         Log.e(BuildConfig.BUILD_TYPE, "onError: Status = " + status.toString());
 
-        Toast.makeText(this, "Place selection failed: " + status.getStatusMessage(),
+        Toast.makeText(this, "TripPlace selection failed: " + status.getStatusMessage(),
                 Toast.LENGTH_SHORT).show();
     }
 
@@ -289,11 +289,4 @@ public class BookRideActivity extends FragmentActivity implements GoogleMap.OnCa
             }
         }
     }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 }
-
-
