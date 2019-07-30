@@ -82,7 +82,6 @@ class TripCreationActivity : AppCompatActivity() {
             }
         })
 
-        viewPager.isSaveFromParentEnabled = false
         adapter = ViewPagerAdapter(supportFragmentManager)
         viewPager.adapter = adapter
 
@@ -113,6 +112,7 @@ class TripCreationActivity : AppCompatActivity() {
             overviewButton.isEnabled = true
         }
         addFragment(fragment = PlaceAddFragment())
+        viewPager.offscreenPageLimit = adapter.count
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
