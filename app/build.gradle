@@ -65,6 +65,7 @@ dependencies {
     implementation 'com.github.KwabenBerko:OpenWeatherMap-Android-Library:2.0.2'
 
     implementation 'com.github.bumptech.glide:glide:4.9.0'
+
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
 
     testImplementation 'junit:junit:4.12'

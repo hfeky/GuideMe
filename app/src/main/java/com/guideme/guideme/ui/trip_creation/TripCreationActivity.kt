@@ -52,7 +52,8 @@ class TripCreationActivity : AppCompatActivity() {
         val intent = intent
 
         if (savedInstanceState == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP &&
-            intent.hasExtra(CIRCULAR_REVEAL_X) && intent.hasExtra(CIRCULAR_REVEAL_Y)) {
+            intent.hasExtra(CIRCULAR_REVEAL_X) && intent.hasExtra(CIRCULAR_REVEAL_Y)
+        ) {
             rootLayout!!.visibility = View.INVISIBLE
 
             val revealX = intent.getIntExtra(CIRCULAR_REVEAL_X, 0)
@@ -60,7 +61,8 @@ class TripCreationActivity : AppCompatActivity() {
 
             val viewTreeObserver = rootLayout!!.viewTreeObserver
             if (viewTreeObserver.isAlive) {
-                viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                viewTreeObserver.addOnGlobalLayoutListener(object :
+                    ViewTreeObserver.OnGlobalLayoutListener {
                     override fun onGlobalLayout() {
                         revealActivity(revealX, revealY)
                         rootLayout!!.viewTreeObserver.removeOnGlobalLayoutListener(this)
@@ -101,7 +103,7 @@ class TripCreationActivity : AppCompatActivity() {
                 addFragment(fragment = fragment)
             }
         } else {
-            trip = Trip("", "", "", "", null, arrayListOf(), arrayListOf())
+            trip = Trip("", "cairo", "", "", "", null, arrayListOf(), arrayListOf())
 
             appBarLayout.setExpanded(false)
             placeImage!!.setImageDrawable(null)
@@ -118,7 +120,11 @@ class TripCreationActivity : AppCompatActivity() {
 
             private var selectedPage: Int = 0
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
 
             }
 
@@ -148,15 +154,18 @@ class TripCreationActivity : AppCompatActivity() {
         }
 
         setDateButton.setOnClickListener {
-            val placeFragment = (viewPager.adapter as ViewPagerAdapter).getItem(viewPager.currentItem) as PlaceFragment
+            val placeFragment =
+                (viewPager.adapter as ViewPagerAdapter).getItem(viewPager.currentItem) as PlaceFragment
 
-            val datePickerDialog = DatePickerDialog(this@TripCreationActivity, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                val calendar = Calendar.getInstance()
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH, month)
-                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                placeFragment.setPlaceDate(calendar.time)
-            },
+            val datePickerDialog = DatePickerDialog(
+                this@TripCreationActivity,
+                DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+                    val calendar = Calendar.getInstance()
+                    calendar.set(Calendar.YEAR, year)
+                    calendar.set(Calendar.MONTH, month)
+                    calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                    placeFragment.setPlaceDate(calendar.time)
+                },
                 DateUtils.getYear(placeFragment.place!!.date),
                 DateUtils.getMonth(placeFragment.place!!.date),
                 DateUtils.getDayOfMonth(placeFragment.place!!.date)
@@ -176,6 +185,7 @@ class TripCreationActivity : AppCompatActivity() {
             }
 
             intent.putExtra("places", places)
+            intent.putExtra("city_id", trip.cityId)
             startActivity(intent)
         }
     }
@@ -190,7 +200,8 @@ class TripCreationActivity : AppCompatActivity() {
     private fun revealActivity(x: Int, y: Int) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             val finalRadius = (max(rootLayout!!.width, rootLayout!!.height) * 1.1).toFloat()
-            val circularReveal = ViewAnimationUtils.createCircularReveal(rootLayout, x, y, 0f, finalRadius)
+            val circularReveal =
+                ViewAnimationUtils.createCircularReveal(rootLayout, x, y, 0f, finalRadius)
             circularReveal.duration = 400
             circularReveal.interpolator = AccelerateInterpolator()
             circularReveal.addListener(object : AnimatorListenerAdapter() {
@@ -200,7 +211,8 @@ class TripCreationActivity : AppCompatActivity() {
             })
             circularReveal.start()
         } else {
-            Toast.makeText(this, "Something went wrong. Please try again.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Something went wrong. Please try again.", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -217,7 +229,11 @@ class TripCreationActivity : AppCompatActivity() {
             val placeIntent = builder.build(this)
             startActivityForResult(placeIntent, REQUEST_PLACE_PICKER)
         } catch (ex: Exception) {
-            Toast.makeText(this, "Google Play Services is not installed on your device.", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                this,
+                "Google Play Services is not installed on your device.",
+                Toast.LENGTH_LONG
+            ).show()
         }
 
     }

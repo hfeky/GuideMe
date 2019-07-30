@@ -22,7 +22,6 @@ import java.util.List;
 public class TripOverviewActivity extends AppCompatActivity {
 
 
-    private DataManager dataManager = new DataManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
