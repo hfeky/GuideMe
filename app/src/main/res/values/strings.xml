@@ -10,9 +10,6 @@
     <string name="title_activity_choose_filters">Trip Preferences</string>
 
 
-
-
-
     <!-- Donate dialog -->
     <string name="donate_dialog_title">Support me</string>
     <string name="donate_dialog_message">If you like this library project and you are willing to support me, you can donate me via Alipay or PayPal.\n\nAlipay: fythonx\@gmail.com\nPayPal: Click PAYPAL button to open a new tab.</string>
@@ -34,4 +31,5 @@ That split the night
 And touched the sound of silence.</string>
 
     <string name="toggle_animation_button">Toggle Animation</string>
+    <string name="title_activity_restaurant">RestaurantActivity</string>
 </resources>
