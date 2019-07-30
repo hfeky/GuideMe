@@ -58,7 +58,7 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
     @Override
     public @NonNull
     CharSequence getTitle(int index) {
-        return index == 0 ? arr.get(0) : (index == 1 ? arr.get(1) : arr.get(2));
+        return arr.get(index);
     }
 
     @Override
@@ -66,16 +66,16 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
     CharSequence getSummary(int index) {
         switch (index) {
             case 0:
-                return Html.fromHtml("Trips reviewed"
+                return Html.fromHtml("Done"
                         + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
             case 1:
-                return Html.fromHtml("Restaurants updated"
+                return Html.fromHtml("Done"
                         + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
             case 2:
-                return Html.fromHtml("Hotels updated"
+                return Html.fromHtml("Done"
                         + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
             case 3:
-                return Html.fromHtml("Book a tour guide!"
+                return Html.fromHtml("Done"
                         + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
             default:
                 return null;
@@ -96,7 +96,7 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
             placesDetail += place.getName() + "\n";
         }
         contentView.setText(
-                index == 0 ? placesDetail : (index == 1 ? "Would you like to visit any other restaurant?" : (index == 2 ? "Would you like to add a Hotel ?" : "Book a Tour Guide Tour guide can mak your trip easier!"))
+                index == 0 ? placesDetail : (index == 1 ? "Would you like to visit any restaurant?" : (index == 2 ? "Would you like to stay at an hotel?" : "Book a Tour Guide to make your trip easier."))
         );
         Button nextButton = inflateView.findViewById(R.id.button_next);
         nextButton.setText(index == 0 ? "Next" : "Yes");
@@ -114,12 +114,14 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
             }
         });
         Button prevButton = inflateView.findViewById(R.id.button_prev);
-        prevButton.setText(index == 0 ? "Cancel" : "No");
+        prevButton.setText(index == 0 ? "Back" : "No");
         inflateView.findViewById(R.id.button_prev).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mVerticalStepperView.nextStep();
-                if (index == 3) {
+                if (index == 0) {
+                    getActivity().finish();
+                } else if (index == 3) {
                     ((TripOverviewActivity) context).enableDoneButton();
                 }
             }
