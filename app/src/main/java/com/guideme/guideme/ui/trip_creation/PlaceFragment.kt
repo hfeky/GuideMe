@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.palette.graphics.Palette
 import com.guideme.guideme.R
 import com.guideme.guideme.data.models.Place
-import com.guideme.guideme.ui.common.CommonUtils
+import com.guideme.guideme.ui.common.DateUtils
 import kotlinx.android.synthetic.main.layout_place.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,10 +22,16 @@ class PlaceFragment : Fragment() {
     var placeImage: Drawable? = null
         private set
 
-    private var place: Place? = null
+    var place: Place? = null
+        private set
+
     private var location: String? = null
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.layout_place, container, false)
         context = getContext() as TripCreationActivity?
         return view
@@ -42,7 +48,10 @@ class PlaceFragment : Fragment() {
 
             placeTitle.text = place!!.name
             placeLocation.text = location
-            placeDate.text = SimpleDateFormat("dd/MM/yyyy", Locale.US).format(CommonUtils.forwardDaysFromTomorrow(place!!.order))
+
+            place!!.date = DateUtils.forwardDaysFromTomorrow(place!!.order)
+            placeDate.text = DateUtils.formatDate(place!!.date)
+
             placeDescription.text = place!!.description
 
             placeImage = resources.getDrawable(R.drawable.image_placeholder)
@@ -70,5 +79,9 @@ class PlaceFragment : Fragment() {
         if (isVisible) {
             context!!.setPlaceImage(placeImage)
         }
+    }
+
+    fun setPlaceDate(date: Date) {
+        placeDate.text = DateUtils.formatDate(date)
     }
 }

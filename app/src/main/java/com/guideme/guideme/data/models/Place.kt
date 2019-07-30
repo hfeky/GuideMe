@@ -2,6 +2,7 @@ package com.guideme.guideme.data.models
 
 import android.os.Parcel
 import android.os.Parcelable
+import java.util.*
 
 data class Place(
     val placeId: String,
@@ -10,12 +11,14 @@ data class Place(
     val order: Int
 ) : Parcelable {
 
+    lateinit var date: Date
+
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!,
         parcel.readString(),
-        parcel.readInt()) {
-    }
+        parcel.readInt()
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(placeId)

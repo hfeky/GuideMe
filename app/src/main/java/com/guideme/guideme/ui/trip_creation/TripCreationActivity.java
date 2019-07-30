@@ -2,6 +2,7 @@ package com.guideme.guideme.ui.trip_creation;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateInterpolator;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -30,8 +32,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.models.Place;
 import com.guideme.guideme.data.models.Trip;
+import com.guideme.guideme.ui.common.DateUtils;
 import com.guideme.guideme.ui.common.ViewPagerAdapter;
 
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -90,7 +94,7 @@ public class TripCreationActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         final EditText tripName = findViewById(R.id.tripName);
         FloatingActionButton editFab = findViewById(R.id.editFab);
-        ViewPager viewPager = findViewById(R.id.viewPager);
+        final ViewPager viewPager = findViewById(R.id.viewPager);
         final FlexboxLayout pageIndicators = findViewById(R.id.pageIndicators);
 
         setSupportActionBar(toolbar);
@@ -182,7 +186,24 @@ public class TripCreationActivity extends AppCompatActivity {
         editFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final PlaceFragment placeFragment = (PlaceFragment) ((ViewPagerAdapter) viewPager.getAdapter()).getItem(viewPager.getCurrentItem());
 
+                DatePickerDialog datePickerDialog = new DatePickerDialog(TripCreationActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, month);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        placeFragment.setPlaceDate(calendar.getTime());
+                    }
+                },
+                        DateUtils.Companion.getYear(placeFragment.getPlace().date),
+                        DateUtils.Companion.getMonth(placeFragment.getPlace().date),
+                        DateUtils.Companion.getDayOfMonth(placeFragment.getPlace().date)
+                );
+
+                datePickerDialog.show();
             }
         });
     }
