@@ -48,7 +48,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final TripPlace place = favoritePlaces.get(position);
         holder.placeTitle.setText(favoritePlaces.get(position).getName());
-        holder.placeLocation.setText("Egypt my country");
+        holder.placeLocation.setText("Egypt");
         holder.placeDescription.setText(favoritePlaces.get(position).getDescription());
 
     }
