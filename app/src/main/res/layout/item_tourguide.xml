@@ -47,6 +47,18 @@
             android:textSize="16sp"
             tools:text="5.0" />
 
+        <TextView
+            android:id="@+id/guideOrigin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/guideName"
+            android:layout_toRightOf="@id/guideAvatar"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="4dp"
+            android:text="origin"
+            android:textColor="#4F744040"
+            android:textSize="14sp"/>
+
 
     </RelativeLayout>
 

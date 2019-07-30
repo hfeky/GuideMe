@@ -7,25 +7,17 @@
     android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="4dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/perk"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:drawableLeft="@drawable/ic_star_black"
-                android:drawableStart="@drawable/ic_star_black"
-                android:textColor="#000000"
-                android:textSize="16sp"
-                tools:text="Single Perk" />
-
-
-        </LinearLayout>
+    <TextView
+        android:id="@+id/perk"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:drawableStart="@drawable/ic_star_black"
+        android:drawableLeft="@drawable/ic_star_black"
+        android:drawablePadding="4dp"
+        android:padding="5dp"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        tools:text="Single Perk" />
 
 </androidx.cardview.widget.CardView>

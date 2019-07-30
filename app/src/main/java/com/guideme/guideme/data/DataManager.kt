@@ -75,7 +75,11 @@ class DataManager {
             }
     }
 
-    fun getTripPlaces(cityId: String, tripId: String, successListener: OnSuccessListener<QuerySnapshot>) {
+    fun getTripPlaces(
+        cityId: String,
+        tripId: String,
+        successListener: OnSuccessListener<QuerySnapshot>
+    ) {
         db.collection("cities")
             .document(cityId)
             .collection("trips")
@@ -103,6 +107,15 @@ class DataManager {
         db.collection("cities")
             .document(cityId)
             .collection("hotels")
+            .get(source)
+            .addOnSuccessListener(successListener)
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents: ", exception)
+            }
+    }
+
+    fun getTourGuides(successListener: OnSuccessListener<QuerySnapshot>) {
+        db.collection("tour_guides")
             .get(source)
             .addOnSuccessListener(successListener)
             .addOnFailureListener { exception ->

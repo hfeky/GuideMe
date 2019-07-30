@@ -1,5 +1,6 @@
 package com.guideme.guideme.ui.dashboard;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,7 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.guideme.guideme.R;
+import com.guideme.guideme.data.DataManager;
 import com.guideme.guideme.data.models.TourGuide;
 
 import java.util.ArrayList;
@@ -17,33 +25,41 @@ import java.util.List;
 
 public class GuidesYouMightLikeActivity extends AppCompatActivity {
 
+    private DataManager dataManager = new DataManager();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_guides_you_might_like);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        final RecyclerView recyclerView = findViewById(R.id.recyclerView);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
 
-        List<TourGuide> guides = new ArrayList<>();
-        List<String> places1 = new ArrayList<>();
-        places1.add("Giza Necopolis");
-        places1.add("Salah El Din Citadel");
-        List<String> places2 = new ArrayList<>();
-        places2.add("Ghaliet Ecolodge & Spa");
-        places2.add("Fetnas Island");
-        guides.add(new TourGuide("Ashraf Mansour", R.drawable.ic_tour_guide, 2.4, places1));
-        guides.add(new TourGuide("Lord Ossama", R.drawable.ic_2029245, 5, places2));
-        guides.add(new TourGuide("Ge Eiad", R.drawable.ic_tour_guide, 5, places1));
-        guides.add(new TourGuide("Ge Passant", R.drawable.ic_tour_guide, 5, places1));
-        guides.add(new TourGuide("Hamada ElPrince",R.drawable.ic_tour_guide , 4.2,places1));
-        guides.add(new TourGuide("Hany Younnes",R.drawable.ic_tour_guide , 3.9,places2));
+        final List<TourGuide> guides = new ArrayList<>();
+        final List<String> trips = new ArrayList<>();
+        trips.add("Giza Necopolis");
+        trips.add("Salah El Din Citadel");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new GuidesAdapter(this, guides));
+
+        dataManager.getTourGuides(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot result) {
+                for (QueryDocumentSnapshot document : result) {
+                    String name = (String) document.get("name");
+                    String photo = (String) document.get("photo");
+                    double rating = (Double) document.get("rating");
+                    String origin = (String) document.get("origin");
+                    List<String> perks = (List<String>) document.get("perks");
+                    guides.add(new TourGuide(name, photo, rating, origin,perks));
+                }
+                recyclerView.getAdapter().notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
