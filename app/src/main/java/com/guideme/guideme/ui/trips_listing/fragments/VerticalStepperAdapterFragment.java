@@ -1,6 +1,7 @@
 package com.guideme.guideme.ui.trips_listing.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -13,8 +14,18 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.guideme.guideme.R;
+import com.guideme.guideme.data.DataManager;
+import com.guideme.guideme.data.models.TourGuide;
+import com.guideme.guideme.data.models.TripPlace;
+import com.guideme.guideme.ui.tour_guide.ChooseFilters;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import moe.feng.common.stepperview.IStepperAdapter;
 import moe.feng.common.stepperview.VerticalStepperItemView;
@@ -24,9 +35,22 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
 
     private VerticalStepperView mVerticalStepperView;
 
+    private ArrayList<String> arr = new ArrayList<>();
+
+    private ArrayList<TripPlace> places = new ArrayList<>();
+
+    public VerticalStepperAdapterFragment(ArrayList<TripPlace> places) {
+        this.places = places;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+        arr.add("Trip Overview");
+        arr.add("Add restaurants?");
+        arr.add("Stay at an hotel?");
+        arr.add("Book a Tour Guide?");
         return inflater.inflate(R.layout.fragment_vertical_stepper_adapter, parent, false);
+
     }
 
     @Override
@@ -38,7 +62,7 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
     @Override
     public @NonNull
     CharSequence getTitle(int index) {
-        return "Step " + index;
+        return index == 0 ? arr.get(0) : (index == 1 ? arr.get(1) : arr.get(2)) ;
     }
 
     @Override
@@ -46,12 +70,22 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
     CharSequence getSummary(int index) {
         switch (index) {
             case 0:
-                return Html.fromHtml("Summarized if needed"
-                        + (mVerticalStepperView.getCurrentStep() > index ? "; <b>isDone!</b>" : "")
+                return Html.fromHtml("Places reviewed"
+                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : "")
                 );
+
+            case 1:
+                return Html.fromHtml("Restaurants updated"
+                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
+
             case 2:
-                return Html.fromHtml("Last step"
-                        + (mVerticalStepperView.getCurrentStep() > index ? "; <b>isDone!</b>" : ""));
+                return Html.fromHtml("Hotels updated"
+                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
+
+            case 3:
+                return Html.fromHtml("Book a tour guide!"
+                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
+
             default:
                 return null;
         }
@@ -59,27 +93,34 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
 
     @Override
     public int size() {
-        return 3;
+        return 4;
     }
 
     @Override
     public View onCreateCustomView(final int index, Context context, VerticalStepperItemView parent) {
         View inflateView = LayoutInflater.from(context).inflate(R.layout.vertical_stepper_sample_item, parent, false);
         TextView contentView = inflateView.findViewById(R.id.item_content);
+        String placesDetail = "";
+        for(TripPlace place : places){
+            placesDetail += place.getName()+ " on "+place.getDate()+"\n";
+        }
         contentView.setText(
-                index == 0 ? R.string.content_step_0 : (index == 1 ? R.string.content_step_1 : R.string.content_step_2)
+                index == 0 ? placesDetail : (index == 1 ? "Would you like to visit any other restaurant?" : (index == 2 ? "Would you like to add a Hotel ?" : "Book a Tour Guide Tour guide can mak your trip easier!"))
         );
         Button nextButton = inflateView.findViewById(R.id.button_next);
-        nextButton.setText(index == size() - 1 ? "Done" : getString(android.R.string.ok));
+        nextButton.setText(index == 0 ? "Next" : "Yes");
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 mVerticalStepperView.nextStep();
+                if(index == 3){
+                    startActivity(new Intent(getContext(), ChooseFilters.class));
+                }
             }
         });
         Button prevButton = inflateView.findViewById(R.id.button_prev);
-        prevButton.setText(android.R.string.cancel);
+        prevButton.setText(index == 0? "Cancel" : "Back");
         inflateView.findViewById(R.id.button_prev).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
