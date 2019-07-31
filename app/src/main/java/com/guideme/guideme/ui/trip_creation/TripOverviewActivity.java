@@ -12,11 +12,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.guideme.guideme.R;
+import com.guideme.guideme.data.models.Trip;
 import com.guideme.guideme.data.models.TripPlace;
 import com.guideme.guideme.ui.home.MainActivity;
 import com.guideme.guideme.ui.trips_listing.fragments.VerticalStepperAdapterFragment;
 
 import java.util.ArrayList;
+
+import io.paperdb.Paper;
 
 public class TripOverviewActivity extends AppCompatActivity {
 
@@ -46,6 +49,13 @@ public class TripOverviewActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Trip trip = getIntent().getExtras().getParcelable("trip");
+                Paper.init(TripOverviewActivity.this);
+                ArrayList<Trip> trips = Paper.book().read("trips");
+                if(trips==null)
+                    trips = new ArrayList<Trip>();
+                trips.add(trip);
+                Paper.book().write("trips",trips);
                 Intent intent = new Intent(TripOverviewActivity.this, MainActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);

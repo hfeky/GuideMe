@@ -24,6 +24,8 @@ import com.guideme.guideme.ui.common.ViewPagerAdapter;
 import com.instabug.library.Instabug;
 import com.instabug.library.invocation.InstabugInvocationEvent;
 
+import io.paperdb.Paper;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle drawerToggle;
@@ -33,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_main);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
         DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
         LinearLayout drawerLinear = findViewById(R.id.drawerLinear);

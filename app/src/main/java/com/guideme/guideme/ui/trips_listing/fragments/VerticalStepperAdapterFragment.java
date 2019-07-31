@@ -132,6 +132,7 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
                 }
             }
         });
+
         return inflateView;
     }
 

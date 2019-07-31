@@ -1,6 +1,7 @@
 package com.guideme.guideme.ui.home;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.models.CommonPhrase;
 import com.guideme.guideme.data.models.Trip;
@@ -18,6 +20,8 @@ import com.guideme.guideme.ui.home.MainActivity;
 import org.apache.log4j.chainsaw.Main;
 
 import java.util.List;
+
+import io.paperdb.Paper;
 
 public class TripHistoryAdapter extends RecyclerView.Adapter<TripHistoryAdapter.ViewHolder> {
 
@@ -53,6 +57,9 @@ public class TripHistoryAdapter extends RecyclerView.Adapter<TripHistoryAdapter.
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         final Trip trip = trips.get(position);
+        Glide.with(context)
+                .load(trip.getPhoto())
+                .into(holder.tripPhoto);
         holder.tripName.setText(trip.getName());
         holder.tripDate.setText("12/12/2012");
         holder.tripDuration.setText("5 days");

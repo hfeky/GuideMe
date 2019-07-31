@@ -89,7 +89,7 @@ class TripCreationActivity : AppCompatActivity() {
         viewPager.adapter = adapter
 
         if (intent.hasExtra("trip")) {
-            trip = intent.extras!!.getParcelable("trip")
+            trip = intent.extras!!.getParcelable("trip")!!
 
             trip.places.sortWith(Comparator { place1, place2 ->
                 place1.order - place2.order
@@ -183,6 +183,7 @@ class TripCreationActivity : AppCompatActivity() {
 
             intent.putExtra("places", places)
             intent.putExtra("city_id", trip.cityId)
+            intent.putExtra("trip",trip)
             startActivity(intent)
         }
     }
