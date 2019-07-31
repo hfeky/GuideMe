@@ -10,46 +10,47 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.guideme.guideme.R;
+import com.guideme.guideme.data.models.Hotel;
 import com.guideme.guideme.data.models.Restaurant;
 
 import java.util.List;
 
-public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder> {
+public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.ViewHolder> {
 
     private Context context;
-    private List<Restaurant> restaurants;
+    private List<Hotel> hotels;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         public View view;
-        public ImageView restaurantIcon;
-        public TextView restaurant, restaurantDescription;
+        public ImageView hotelIcon;
+        public TextView hotelName, hotelDescription;
 
         public ViewHolder(View view) {
             super(view);
             this.view = view;
-            restaurantIcon = view.findViewById(R.id.restaurantIcon);
-            restaurant = view.findViewById(R.id.restaurantName);
-            restaurantDescription = view.findViewById(R.id.restaurantDescription);
+            hotelIcon = view.findViewById(R.id.hotelIcon);
+            hotelName = view.findViewById(R.id.hotelName);
+            hotelDescription = view.findViewById(R.id.hotelDescription);
         }
     }
 
-    public RestaurantsAdapter(Context context, List<Restaurant> restaurant) {
+    public HotelsAdapter(Context context, List<Hotel> hotel) {
         this.context = context;
-        this.restaurants = restaurant;
+        this.hotels = hotels;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_restaurant, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_hotel, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        final Restaurant restaurant = restaurants.get(position);
-        holder.restaurant.setText(restaurant.getName());
-        holder.restaurantDescription.setText(restaurant.getDescription());
+        final Hotel hotel = hotels.get(position);
+        holder.hotelName.setText(hotel.getName());
+        holder.hotelDescription.setText(hotel.getDescription());
 //        holder.hotelIcon.setImageResource(hotelName.get());
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return hotels.size();
     }
 }
