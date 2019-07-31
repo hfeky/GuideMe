@@ -67,17 +67,17 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
     CharSequence getSummary(int index) {
         switch (index) {
             case 0:
-                return Html.fromHtml("Done"
-                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
+                return Html.fromHtml(
+                        (mVerticalStepperView.getCurrentStep() > index ? "; <b>Done!</b>" : ""));
             case 1:
-                return Html.fromHtml("Done"
-                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
+                return Html.fromHtml(
+                        (mVerticalStepperView.getCurrentStep() > index ? "; <b>Done!</b>" : ""));
             case 2:
-                return Html.fromHtml("Done"
-                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
+                return Html.fromHtml(
+                        (mVerticalStepperView.getCurrentStep() > index ? "; <b>Done!</b>" : ""));
             case 3:
-                return Html.fromHtml("Done"
-                        + (mVerticalStepperView.getCurrentStep() > index ? " <b></b>" : ""));
+                return Html.fromHtml(
+                        (mVerticalStepperView.getCurrentStep() > index ? "; <b>Done!</b>" : ""));
             default:
                 return null;
         }

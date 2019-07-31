@@ -485,7 +485,6 @@ public class BookRideActivity extends FragmentActivity implements DirectionCallb
         LatLngBounds bounds = new LatLngBounds(southwest, northeast);
         mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
     }
-
 }
 
 
