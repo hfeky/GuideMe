@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.models.Hotel;
-import com.guideme.guideme.data.models.Restaurant;
 
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class HotelsAdapter extends RecyclerView.Adapter<HotelsAdapter.ViewHolder
         }
     }
 
-    public HotelsAdapter(Context context, List<Hotel> hotel) {
+    public HotelsAdapter(Context context, List<Hotel> hotels) {
         this.context = context;
         this.hotels = hotels;
     }

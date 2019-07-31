@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.models.TripPlace;
 import com.guideme.guideme.ui.tour_guide.TourGuidesFilterActivity;
+import com.guideme.guideme.ui.trip_creation.HotelsActivity;
 import com.guideme.guideme.ui.trip_creation.RestaurantsActivity;
 import com.guideme.guideme.ui.trip_creation.TripOverviewActivity;
 
@@ -108,11 +109,13 @@ public class VerticalStepperAdapterFragment extends Fragment implements IStepper
                     Intent intent = new Intent(getContext(), RestaurantsActivity.class);
                     intent.putExtra("city_id", cityId);
                     startActivity(intent);
+                } else if (index == 2) {
+                    Intent intent = new Intent(getContext(), HotelsActivity.class);
+                    intent.putExtra("city_id", cityId);
+                    startActivity(intent);
                 } else if (index == 3) {
-                    startActivity(new Intent(getContext(), TourGuidesFilterActivity.class).putExtra("lady_gege", "ge"));
-                }
-                else if(index == 4){
-
+                    startActivity(new Intent(getContext(), TourGuidesFilterActivity.class));
+                    ((TripOverviewActivity) context).enableDoneButton();
                 }
             }
         });

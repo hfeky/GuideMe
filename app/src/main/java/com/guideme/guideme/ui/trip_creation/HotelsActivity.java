@@ -13,6 +13,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.guideme.guideme.R;
 import com.guideme.guideme.data.DataManager;
+import com.guideme.guideme.data.models.Hotel;
 import com.guideme.guideme.data.models.Restaurant;
 
 import java.util.ArrayList;
@@ -34,11 +35,11 @@ public class HotelsActivity extends AppCompatActivity {
 
         DataManager dataManager = new DataManager();
 
-        List<Restaurant> hotels = new ArrayList<>();
+        List<Hotel> hotels = new ArrayList<>();
         String cityId = getIntent().getStringExtra("city_id");
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new RestaurantsAdapter(this, hotels));
+        recyclerView.setAdapter(new HotelsAdapter(this, hotels));
 
         dataManager.getHotels(cityId, new OnSuccessListener<QuerySnapshot>() {
             @Override
@@ -47,7 +48,7 @@ public class HotelsActivity extends AppCompatActivity {
                     String placeId = (String) document.get("place_id");
                     String name = (String) document.get("name");
                     String description = (String) document.get("description");
-                    hotels.add(new Restaurant(placeId, name, description));
+                    hotels.add(new Hotel(placeId, name, description));
                     recyclerView.getAdapter().notifyDataSetChanged();
                 }
             }

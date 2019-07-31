@@ -73,6 +73,11 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name=".ui.trip_creation.HotelsActivity"
+            android:label="Restaurants"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".ui.tour_guide.AvailableTourGuidesActivity"
             android:label="Available Tour Guides"
             android:screenOrientation="portrait" />

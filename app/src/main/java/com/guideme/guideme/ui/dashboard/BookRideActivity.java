@@ -181,7 +181,6 @@ public class BookRideActivity extends FragmentActivity implements DirectionCallb
                 drop_address = drop_address.replaceAll(" ", "%20");
                 drop_city = drop_city.replaceAll(" ", "%20");
 
-                Toast.makeText(BookRideActivity.this, address + " HHBM", Toast.LENGTH_LONG).show();
 //                String uri = "https://m.uber.com/ul/?client_id=evlvdjIz8Guu4Hka2dFfcoiNdm98kwry&action=setPickup&pickup[latitude]=" + lastLocation.getLatitude() + "&pickup[longitude]=-" + lastLocation.getLongitude() + "&pickup[nickname]=" + address + "&dropoff[latitude]=" + latitude + "&dropoff[longitude]=" + longitude + "&dropoff[nickname]=" + drop_address + "&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d\n";
                 String uri = "https://m.uber.com/ul/?client_id=evlvdjIz8Guu4Hka2dFfcoiNdm98kwry&action=setPickup&pickup[latitude]=" + lastLocation.getLatitude() + "&pickup[longitude]=" + lastLocation.getLongitude() + "&pickup[nickname]=" + city + "&pickup[formatted_address]=" + address + "&dropoff[latitude]=" + latitude + "&dropoff[longitude]=" + longitude + "&dropoff[nickname]=" + drop_city + "&dropoff[formatted_address]=" + drop_address + "&product_id=a1111c8c-c720-46c3-8534-2fcdd730040d\n";
                 Intent intent = new Intent(Intent.ACTION_VIEW);

@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:text="20 C" />
+                android:text="22 C" />
 
         </LinearLayout>
 
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:text="20 C" />
+                android:text="23 C" />
 
         </LinearLayout>
 
@@ -215,7 +215,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:text="20 C" />
+                android:text="21 C" />
 
         </LinearLayout>
 
