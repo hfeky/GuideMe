@@ -1,5 +1,6 @@
 package com.guideme.guideme.ui.home;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class TripHistoryAdapter extends RecyclerView.Adapter<TripHistoryAdapter.ViewHolder> {
 
-    private MainActivity context;
+    private Context context;
     private List<Trip> trips;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -38,7 +39,7 @@ public class TripHistoryAdapter extends RecyclerView.Adapter<TripHistoryAdapter.
         }
     }
 
-    public TripHistoryAdapter(MainActivity context, List<Trip> trips) {
+    public TripHistoryAdapter(Context context, List<Trip> trips) {
         this.context = context;
         this.trips = trips;
     }
@@ -56,12 +57,7 @@ public class TripHistoryAdapter extends RecyclerView.Adapter<TripHistoryAdapter.
         holder.tripDate.setText("12/12/2012");
         holder.tripDuration.setText("5 days");
         holder.tripPhoto.setImageResource(R.drawable.ic_places_fire_station);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Play sound.
-            }
-        });
+
     }
 
     @Override

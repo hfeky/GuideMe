@@ -6,7 +6,7 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone" />
+        android:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/noHistory"
@@ -21,7 +21,8 @@
             android:gravity="center"
             android:text="No planned trips"
             android:textColor="#000000"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
