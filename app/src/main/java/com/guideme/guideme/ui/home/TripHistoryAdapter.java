@@ -61,8 +61,8 @@ public class TripHistoryAdapter extends RecyclerView.Adapter<TripHistoryAdapter.
                 .load(trip.getPhoto())
                 .into(holder.tripPhoto);
         holder.tripName.setText(trip.getName());
-        holder.tripDate.setText("12/12/2012");
-        holder.tripDuration.setText("5 days");
+        holder.tripDate.setText(DateUtils.Companion.formatDate(trip.getPlaces().get(0).date));
+        holder.tripDuration.setText("");
         holder.tripPhoto.setImageResource(R.drawable.ic_places_fire_station);
 
     }
