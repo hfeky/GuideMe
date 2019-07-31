@@ -10,9 +10,9 @@
 
         <com.bosphere.fadingedgelayout.FadingEdgeLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="400dp"
             app:fel_edge="bottom"
-            app:fel_size_bottom="200dp">
+            app:fel_size_bottom="400dp">
 
             <View
                 android:id="@+id/fadingEdgeLight"

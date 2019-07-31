@@ -215,7 +215,7 @@ public class BookRideActivity extends FragmentActivity implements DirectionCallb
         autocompleteFragment.setHint("Enter a location");
         autocompleteFragment.setCountry("EG");
 
-        // Specify the types of place data to return.
+        // Specify the types of tripPlace data to return.
         autocompleteFragment.setPlaceFields(Arrays.asList(Place.Field.LAT_LNG));
 
         // Set up a PlaceSelectionListener to handle the response.

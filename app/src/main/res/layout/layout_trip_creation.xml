@@ -1,0 +1,17 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/addPlaceLayout"
+        layout="@layout/layout_add_place"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/placeLayout"
+        layout="@layout/layout_place"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+</FrameLayout>

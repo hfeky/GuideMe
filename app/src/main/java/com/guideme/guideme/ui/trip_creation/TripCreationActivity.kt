@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
@@ -16,8 +17,8 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
-import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
+import com.google.android.libraries.places.api.model.Place
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.guideme.guideme.R
@@ -95,12 +96,7 @@ class TripCreationActivity : AppCompatActivity() {
             })
 
             for (place in trip.places) {
-                val fragment = PlaceFragment()
-                val bundle = Bundle()
-                bundle.putParcelable("place", place)
-                bundle.putString("location", trip.location + ", Egypt")
-                fragment.arguments = bundle
-                addFragment(fragment = fragment)
+                addPlace(place, true)
             }
         } else {
             trip = Trip("", "cairo", "", "", "", null, arrayListOf(), arrayListOf())
@@ -109,12 +105,11 @@ class TripCreationActivity : AppCompatActivity() {
             placeImage!!.setImageDrawable(null)
         }
 
-        if (adapter.count > 0) {
+        addPlace(null, false)
+        if (adapter.count > 1) {
             setDateButton.isEnabled = true
             overviewButton.isEnabled = true
         }
-        addFragment(fragment = PlaceAddFragment())
-        viewPager.offscreenPageLimit = adapter.count
 
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
 
@@ -129,16 +124,17 @@ class TripCreationActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
+                setDateButton.isEnabled = position != adapter.count - 1
                 pageIndicators.getChildAt(selectedPage).isSelected = false
                 pageIndicators.getChildAt(position).isSelected = true
                 selectedPage = position
-                if (adapter.getItem(position) is PlaceAddFragment) {
+                if ((adapter.getItem(position) as PlaceFragment).tripPlace == null) {
                     appBarLayout.setExpanded(false)
-                    placeImage!!.setImageDrawable(null)
+                    placeImage!!.setImageBitmap(null)
                 } else {
                     appBarLayout.setExpanded(true)
                     val fragment = adapter.getItem(position) as PlaceFragment
-                    placeImage!!.setImageDrawable(fragment.placeImage)
+                    placeImage!!.setImageBitmap(fragment.image)
                 }
             }
 
@@ -166,9 +162,9 @@ class TripCreationActivity : AppCompatActivity() {
                     calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
                     placeFragment.setPlaceDate(calendar.time)
                 },
-                DateUtils.getYear(placeFragment.place!!.date),
-                DateUtils.getMonth(placeFragment.place!!.date),
-                DateUtils.getDayOfMonth(placeFragment.place!!.date)
+                DateUtils.getYear(placeFragment.tripPlace!!.date),
+                DateUtils.getMonth(placeFragment.tripPlace!!.date),
+                DateUtils.getDayOfMonth(placeFragment.tripPlace!!.date)
             )
 
             datePickerDialog.show()
@@ -179,13 +175,13 @@ class TripCreationActivity : AppCompatActivity() {
             val places = arrayListOf<TripPlace>()
 
             for (fragment in adapter.fragments) {
-                if (fragment is PlaceFragment) {
-                    places.add(fragment.place!!)
+                val place = (fragment as PlaceFragment).tripPlace
+                place?.let {
+                    places.add(it)
                 }
             }
 
             intent.putExtra("places", places)
-            intent.putExtra("city_id", trip.cityId)
             intent.putExtra("city_id", trip.cityId)
             startActivity(intent)
         }
@@ -217,8 +213,8 @@ class TripCreationActivity : AppCompatActivity() {
         }
     }
 
-    fun setPlaceImage(drawable: Drawable) {
-        placeImage.setImageDrawable(drawable)
+    fun setPlaceImage(bitmap: Bitmap) {
+        placeImage.setImageBitmap(bitmap)
     }
 
     fun showPlacePicker() {
@@ -239,17 +235,52 @@ class TripCreationActivity : AppCompatActivity() {
 
     }
 
-    private fun addFragment(index: Int? = null, fragment: Fragment) {
-        if (index != null) {
-            for (i in index until adapter.count) {
-                adapter.removeFragment(i)
+    private fun addPlace(tripPlace: TripPlace?, withBundle: Boolean) {
+        if (tripPlace != null) {
+            if (withBundle) {
+                val fragment = PlaceFragment()
+                val bundle = Bundle()
+                bundle.putParcelable("tripPlace", tripPlace)
+                bundle.putString("location", trip.location)
+                fragment.arguments = bundle
+                adapter.addFragment(fragment)
+                adapter.notifyDataSetChanged()
+            } else {
+                val fragment = adapter.fragments[adapter.count - 1] as PlaceFragment
+                fragment.setPlace(tripPlace)
+
+                val addFragment = PlaceFragment()
+                val bundle = Bundle()
+                bundle.putString("location", trip.location)
+                addFragment.arguments = bundle
+                adapter.addFragment(addFragment)
                 adapter.notifyDataSetChanged()
             }
-            adapter.addFragment(fragment)
-            adapter.addFragment(PlaceAddFragment())
         } else {
-            adapter.addFragment(fragment)
+            val addFragment = PlaceFragment()
+            val bundle = Bundle()
+            bundle.putString("location", trip.location)
+            addFragment.arguments = bundle
+            adapter.addFragment(addFragment)
+            adapter.notifyDataSetChanged()
         }
+
+        val indicator = ImageView(this)
+        indicator.setImageResource(R.drawable.page_indicator)
+        pageIndicators.addView(indicator)
+
+        viewPager.offscreenPageLimit = adapter.count
+    }
+
+    private fun addPlace(place: Place) {
+        val fragment = adapter.fragments[adapter.count - 1] as PlaceFragment
+        fragment.setPlace(place, adapter.count)
+
+        val addFragment = PlaceFragment()
+        val bundle = Bundle()
+        bundle.putString("location", trip.location)
+        addFragment.arguments = bundle
+        adapter.addFragment(addFragment)
         adapter.notifyDataSetChanged()
 
         val indicator = ImageView(this)
@@ -261,21 +292,10 @@ class TripCreationActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_PLACE_PICKER && resultCode == RESULT_OK) {
             val selectedPlace = PingPlacePicker.getPlace(data!!)
-
             if (selectedPlace != null) {
-                val fragment = PlaceFragment()
-                val bundle = Bundle()
-
-                val place = TripPlace(selectedPlace.id!!, selectedPlace.name!!, null, adapter.count)
-                trip.places.add(place)
-                bundle.putParcelable("place", selectedPlace)
-                if (trip.location.isEmpty()) {
-                    bundle.putString("location", "Egypt")
-                } else {
-                    bundle.putString("location", trip.location + ", Egypt")
-                }
-                fragment.arguments = bundle
-                addFragment(adapter.count - 1, fragment)
+                setDateButton.isEnabled = true
+                appBarLayout.setExpanded(true)
+                addPlace(selectedPlace)
             }
         }
     }
