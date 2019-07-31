@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="24sp"
-                android:text="Hussein El Feky" />
+                android:text="Ossama Akram" />
 
         </LinearLayout>
 

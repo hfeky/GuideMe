@@ -383,6 +383,7 @@ public class BookRideActivity extends FragmentActivity implements DirectionCallb
             return;
         }
         final LatLng latLng = place.getLatLng();
+        mMap.clear();
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         longitude = latLng.longitude + "";
@@ -484,7 +485,6 @@ public class BookRideActivity extends FragmentActivity implements DirectionCallb
         LatLngBounds bounds = new LatLngBounds(southwest, northeast);
         mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
     }
-
 }
 
 
